@@ -46,6 +46,9 @@ public class Player : MonoBehaviour
                 // turn fishing mode OFF!!
                 fishingMode = false;
                 Debug.Log("You suddenly decided to stop fishing!");
+                // Stop ALL FISHING COROUTINES!!
+                StopCoroutine(WaitingForFish());
+                StopCoroutine(FishBitTheHook());
                 // activate cooldown to prevent spamming + start timer to deactivate cooldown after a few seconds..
                 fishingModeCooldown = true;
                 StartCoroutine(FishModeCDTimer());
@@ -76,24 +79,27 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Line casted! And now, we wait for fish..");
         yield return new WaitForSeconds(3);
-        if(fishingMode)  // remember, we NEED to check if player is still in fishing mode!
+        if (fishingMode)
             StartCoroutine(FishBitTheHook());
     }
 
     // FISH BIT THE HOOK -> quick time event! player has a 1.5 second time window, to press C in order to catch the fish!
     IEnumerator FishBitTheHook()
     {
-        caughtFish = "NotCaught";  // signals to the program that a fish bit the hook, but has not been caught.
-        Debug.Log("A fish has bitten the hook!! Press C to catch the fish!");
-        
-        yield return new WaitForSeconds(1.5f);  // wait 1.5 seconds for player to catch fish..
-
-        if(caughtFish == "NotCaught" && fishingMode)  // if time runs out, and player still hasn't caught the fish..
+        if (fishingMode)
         {
-            Debug.Log("Oh no! The fish got away!");  // the fish gets bored and escapes! womp womp..
-            // turn fishing mode OFF and reset caughtFish to "N/A".
-            fishingMode = false;
-            caughtFish = "N/A";
+            caughtFish = "NotCaught";  // signals to the program that a fish bit the hook, but has not been caught.
+            Debug.Log("A fish has bitten the hook!! Press C to catch the fish!");
+
+            yield return new WaitForSeconds(1.5f);  // wait 1.5 seconds for player to catch fish..
+
+            if (caughtFish == "NotCaught" && fishingMode)  // if time runs out, and player still hasn't caught the fish..
+            {
+                Debug.Log("Oh no! The fish got away!");  // the fish gets bored and escapes! womp womp..
+                // turn fishing mode OFF and reset caughtFish to "N/A".
+                fishingMode = false;
+                caughtFish = "N/A";
+            }
         }
     }
 }
