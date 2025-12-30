@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // introduce public variable for player animator, allows us to play animations from script!
+    public Animator playerAnim;
+    
     int fishCount = 0;  // when player catches fish, we increment fish count by 1!
 
     bool fishingMode = false;  // FISHING MODE: player casts line, waits for fish, fish bites hook, then player catches the fish!
@@ -28,7 +31,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Handle F key inputs -> Enter / Exit Fishing Mode!
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (!fishingMode && !fishingModeCooldown)  // if fishing mode is off, and no cooldown..
             {
@@ -45,6 +48,7 @@ public class Player : MonoBehaviour
             {
                 // turn fishing mode OFF!!
                 fishingMode = false;
+                playerAnim.Play("playerIdle");
                 Debug.Log("You suddenly decided to stop fishing!");
                 // Stop ALL FISHING COROUTINES!!
                 StopCoroutine(WaitingForFish());
@@ -56,10 +60,11 @@ public class Player : MonoBehaviour
         }
 
         // Handle C key inputs -> Catch a fish!
-        if (Input.GetKey(KeyCode.C) && fishingMode && caughtFish == "NotCaught")  // if fishing mode is ON, a fish has bitten the hook, and player presses C..
+        if (Input.GetKeyDown(KeyCode.C) && fishingMode && caughtFish == "NotCaught")  // if fishing mode is ON, a fish has bitten the hook, and player presses C..
         {
             // player successfully caught the fish, increment fish count by 1!
             fishCount++;
+            playerAnim.Play("playerCaughtFish");
             Debug.Log("Congrats! You caught the fish!");
             // turn fishing mode OFF and reset caughtFish to "N/A".
             fishingMode = false;
@@ -70,13 +75,16 @@ public class Player : MonoBehaviour
     // COOLDOWN TIMER -> player is not allowed to spam F key, must wait a bit before toggling fishing mode ON / OFF!
     IEnumerator FishModeCDTimer()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         fishingModeCooldown = false;
     }
 
     // WAITING FOR FISH -> wait 3 seconds for a fish to bite!
     IEnumerator WaitingForFish()
     {
+        // PLAY SWING BACK ANIMATION -> (IN ANIMATOR..) TRANSITIONS TO FISHING IDLE AFTER 0.5 SECONDS!!
+        playerAnim.Play("playerSwingBack");
+        yield return new WaitForSeconds(0.25f);
         Debug.Log("Line casted! And now, we wait for fish..");
         yield return new WaitForSeconds(3);
         if (fishingMode)
@@ -89,16 +97,19 @@ public class Player : MonoBehaviour
         if (fishingMode)
         {
             caughtFish = "NotCaught";  // signals to the program that a fish bit the hook, but has not been caught.
+            playerAnim.Play("FishBitesHook");
             Debug.Log("A fish has bitten the hook!! Press C to catch the fish!");
 
-            yield return new WaitForSeconds(1.5f);  // wait 1.5 seconds for player to catch fish..
+            yield return new WaitForSeconds(1f);  // wait 1.5 seconds for player to catch fish..
 
             if (caughtFish == "NotCaught" && fishingMode)  // if time runs out, and player still hasn't caught the fish..
             {
-                Debug.Log("Oh no! The fish got away!");  // the fish gets bored and escapes! womp womp..
                 // turn fishing mode OFF and reset caughtFish to "N/A".
                 fishingMode = false;
                 caughtFish = "N/A";
+                // the fish gets bored and escapes! womp womp..
+                playerAnim.Play("playerIdle");
+                Debug.Log("Oh no! The fish got away!");
             }
         }
     }
