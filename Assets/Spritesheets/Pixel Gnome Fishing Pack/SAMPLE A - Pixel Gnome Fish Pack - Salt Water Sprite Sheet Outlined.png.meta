@@ -105,7 +105,7 @@ TextureImporter:
         width: 18
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,7 +118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SAMPLE A - Pixel Gnome Fish Pack - Salt Water Sprite Sheet Outlined_1
+      name: fish
       rect:
         serializedVersion: 2
         x: 18
@@ -126,7 +126,7 @@ TextureImporter:
         width: 18
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,7 +147,7 @@ TextureImporter:
         width: 18
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,7 +168,7 @@ TextureImporter:
         width: 18
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,7 +189,7 @@ TextureImporter:
         width: 18
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,10 +213,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       SAMPLE A - Pixel Gnome Fish Pack - Salt Water Sprite Sheet Outlined_0: 1689219416
-      SAMPLE A - Pixel Gnome Fish Pack - Salt Water Sprite Sheet Outlined_1: -1015821465
       SAMPLE A - Pixel Gnome Fish Pack - Salt Water Sprite Sheet Outlined_2: 149168963
       SAMPLE A - Pixel Gnome Fish Pack - Salt Water Sprite Sheet Outlined_3: -1637072013
       SAMPLE A - Pixel Gnome Fish Pack - Salt Water Sprite Sheet Outlined_4: 851549014
+      fish: -1015821465
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

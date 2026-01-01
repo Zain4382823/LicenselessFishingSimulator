@@ -62,10 +62,22 @@ public class Player : MonoBehaviour
         // Handle C key inputs -> Catch a fish!
         if (Input.GetKeyDown(KeyCode.C) && fishingMode && caughtFish == "NotCaught")  // if fishing mode is ON, a fish has bitten the hook, and player presses C..
         {
+            // FISH TYPE RNG CHECK - SPIN THE WHEEL!! WHAT'S THE DROP GONNA BE?
+            if (Random.value < 0.5)  // 50/50 chance for either Fish / Junk catch! 
+                Fish.fishID = "Fish";
+            else
+                Fish.fishID = "Junk";
+
             // player successfully caught the fish, increment fish count by 1!
             fishCount++;
             playerAnim.Play("playerCaughtFish");
-            Debug.Log("Congrats! You caught the fish!");
+
+            // send confirmation log, message varies based on Fish ID
+            if (Fish.fishID == "Fish")
+                Debug.Log("Congrats! You caught the fish!");
+            else
+                Debug.Log("EWWW!! You caught JUNK!!");
+
             // turn fishing mode OFF and reset caughtFish to "N/A".
             fishingMode = false;
             caughtFish = "N/A";
@@ -86,7 +98,22 @@ public class Player : MonoBehaviour
         playerAnim.Play("playerSwingBack");
         yield return new WaitForSeconds(0.25f);
         Debug.Log("Line casted! And now, we wait for fish..");
+        
         yield return new WaitForSeconds(3);
+
+        // FISHING SPEED RNG!
+        bool waitingForFish = true;
+
+        while(waitingForFish)  // every 3 second interval, run a x% chance to advance to "FishBitTheHook()" stage!
+        {
+            if (Random.value < 0.5)  // 50% chance.
+                waitingForFish = false;  // on a successful roll, exit the while loop and advance to the next stage!
+            else
+                Debug.Log("Fishing dice roll failed!!");
+                yield return new WaitForSeconds(3);  // if we fail this roll, we wait another 3 seconds before trying again..
+        }
+
+        // advance to "FishBitTheHook()" stage!
         if (fishingMode)
             StartCoroutine(FishBitTheHook());
     }
