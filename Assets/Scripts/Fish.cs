@@ -14,6 +14,8 @@ public class Fish : MonoBehaviour
     public Sprite fishSprite;
     // JUNK SPRITE VARIABLE
     public Sprite junkSprite;
+    // TREASURE SPRITE VARIABLE
+    public Sprite treasureSprite;
 
 
     // Start is called before the first frame update
@@ -32,6 +34,9 @@ public class Fish : MonoBehaviour
                 break;
             case "Junk":  // JUNK ID
                 spriteRenderer.sprite = junkSprite;  // change object to junk sprite
+                break;
+            case "Treasure":  // TREASURE ID
+                spriteRenderer.sprite = treasureSprite;  // change object to treasure sprite
                 break;
         }
     }

@@ -62,11 +62,7 @@ public class Player : MonoBehaviour
         // Handle C key inputs -> Catch a fish!
         if (Input.GetKeyDown(KeyCode.C) && fishingMode && caughtFish == "NotCaught")  // if fishing mode is ON, a fish has bitten the hook, and player presses C..
         {
-            // FISH TYPE RNG CHECK - SPIN THE WHEEL!! WHAT'S THE DROP GONNA BE?
-            if (Random.value < 0.5)  // 50/50 chance for either Fish / Junk catch! 
-                Fish.fishID = "Fish";
-            else
-                Fish.fishID = "Junk";
+            FishingLootTableRNG();  // first, we use a separate function to determine what the player's fishing loot will be..
 
             // player successfully caught the fish, increment fish count by 1!
             fishCount++;
@@ -75,13 +71,26 @@ public class Player : MonoBehaviour
             // send confirmation log, message varies based on Fish ID
             if (Fish.fishID == "Fish")
                 Debug.Log("Congrats! You caught the fish!");
-            else
+            else if (Fish.fishID == "Junk")
                 Debug.Log("EWWW!! You caught JUNK!!");
+            else
+                Debug.Log("WOW!! You found precious treasure!");
 
             // turn fishing mode OFF and reset caughtFish to "N/A".
             fishingMode = false;
             caughtFish = "N/A";
         }
+    }
+
+    // FISHINGLOOTTABLERNG() -> SPIN THE RNG WHEEL!! WHAT'S THE DROP GONNA BE?
+    void FishingLootTableRNG()
+    {
+        if (Random.value < 0.65)  // 65% chance for Fish!
+            Fish.fishID = "Fish";
+        else if (Random.value < 0.20)  // 20% chance for Treasure!
+            Fish.fishID = "Treasure";
+        else
+            Fish.fishID = "Junk";  // otherwise, if it ain't fish, and it ain't treasure.. it's junk!
     }
 
     // COOLDOWN TIMER -> player is not allowed to spam F key, must wait a bit before toggling fishing mode ON / OFF!
@@ -99,7 +108,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         Debug.Log("Line casted! And now, we wait for fish..");
         
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
 
         // FISHING SPEED RNG!
         bool waitingForFish = true;
