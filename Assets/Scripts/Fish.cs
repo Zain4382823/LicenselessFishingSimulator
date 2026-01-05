@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    // FISH -> CHANGE CAUGHT FISH OBJECT'S SPRITE BASED ON WHAT THE PLAYER CAUGHT (FISH ID)
-    public static string fishID = "Fish";
+    // FISH -> CHANGE CAUGHT FISH OBJECT'S SPRITE BASED ON WHAT THE PLAYER CAUGHT!
+    
+    // Fish Type -> Fish? Junk? Treasure? each type has its own unique loot table!
+    public static string fishType = "Fish";
+
+    // Fish ID -> while FishType is the LOOT TABLE, FishID is the SPECIFIC ITEM we pick FROM THE LOOT TABLE!
+    public static string fishID = "Cod";
 
     // SETTING UP SPRITE RENDERER
     public SpriteRenderer spriteRenderer;
@@ -16,7 +21,8 @@ public class Fish : MonoBehaviour
     public Sprite junkSprite;
     // TREASURE SPRITE VARIABLE
     public Sprite treasureSprite;
-
+    // NIGHTMARE ORB VARIABLE
+    public Sprite nightmareOrbSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -27,16 +33,19 @@ public class Fish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(fishID)
+        switch(fishType)
         {
-            case "Fish":  // FISH ID
+            case "Fish":  // we caught a FISH!
                 spriteRenderer.sprite = fishSprite;  // change object to fish sprite
                 break;
-            case "Junk":  // JUNK ID
+            case "Junk":  // we caught JUNK!
                 spriteRenderer.sprite = junkSprite;  // change object to junk sprite
                 break;
-            case "Treasure":  // TREASURE ID
+            case "Treasure":  // we caught TREASURE!
                 spriteRenderer.sprite = treasureSprite;  // change object to treasure sprite
+                break;
+            case "Nightmare Orb": // we got the NIGHTMARE ORB!
+                spriteRenderer.sprite = nightmareOrbSprite;  // change object to nightmare orb sprite
                 break;
         }
     }

@@ -69,12 +69,14 @@ public class Player : MonoBehaviour
             playerAnim.Play("playerCaughtFish");
 
             // send confirmation log, message varies based on Fish ID
-            if (Fish.fishID == "Fish")
+            if (Fish.fishType == "Fish")
                 Debug.Log("Congrats! You caught the fish!");
-            else if (Fish.fishID == "Junk")
+            else if (Fish.fishType == "Junk")
                 Debug.Log("EWWW!! You caught JUNK!!");
-            else
+            else if (Fish.fishType == "Treasure")
                 Debug.Log("WOW!! You found precious treasure!");
+            else
+                Debug.Log("At last, you've finally found: THE NIGHTMARE ORB.");
 
             // turn fishing mode OFF and reset caughtFish to "N/A".
             fishingMode = false;
@@ -85,12 +87,35 @@ public class Player : MonoBehaviour
     // FISHINGLOOTTABLERNG() -> SPIN THE RNG WHEEL!! WHAT'S THE DROP GONNA BE?
     void FishingLootTableRNG()
     {
+        // PHASE 1 - RNG Determines Fish Type..
+
         if (Random.value < 0.65)  // 65% chance for Fish!
-            Fish.fishID = "Fish";
+            Fish.fishType = "Fish";
         else if (Random.value < 0.20)  // 20% chance for Treasure!
-            Fish.fishID = "Treasure";
+            Fish.fishType = "Treasure";
+        else if (Random.value < (1/1000000000))  // One in a BILLION chance for Nightmare Orb, RAREST DROP IN THE GAME!!
+            Fish.fishType = "Nightmare Orb";
         else
-            Fish.fishID = "Junk";  // otherwise, if it ain't fish, and it ain't treasure.. it's junk!
+            Fish.fishType = "Junk";  // otherwise, if it ain't fish, treasure, or a nightmare orb.. it's junk!
+
+
+        // PHASE 2 - Based on chosen Fish Type, RNG determines which item we get from that specific loot table..
+
+        switch(Fish.fishType)
+        {
+            case "Fish":  // FISH LOOT TABLE: just Cod for now..
+                Fish.fishID = "Cod";
+                break;
+            case "Junk":  // JUNK LOOT TABLE: just Fish Bait for now..
+                Fish.fishID = "Fish Bait";
+                break;
+            case "Treasure":  // TREASURE LOOT TABLE: just Lucky Diamond for now..
+                Fish.fishID = "Lucky Diamond";
+                break;
+            case "Nightmare Orb":  // NIGHTMARE ORB!... Is technically just an orb, so..
+                Fish.fishID = "Nightmare Orb";
+                break;
+        }
     }
 
     // COOLDOWN TIMER -> player is not allowed to spam F key, must wait a bit before toggling fishing mode ON / OFF!
