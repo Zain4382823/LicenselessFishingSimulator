@@ -69,14 +69,7 @@ public class Player : MonoBehaviour
             playerAnim.Play("playerCaughtFish");
 
             // send confirmation log, message varies based on Fish ID
-            if (Fish.fishType == "Fish")
-                Debug.Log("Congrats! You caught the fish!");
-            else if (Fish.fishType == "Junk")
-                Debug.Log("EWWW!! You caught JUNK!!");
-            else if (Fish.fishType == "Treasure")
-                Debug.Log("WOW!! You found precious treasure!");
-            else
-                Debug.Log("At last, you've finally found: THE NIGHTMARE ORB.");
+            Debug.LogFormat("{0}! You caught: {1}!", Fish.fishType.ToUpper(), Fish.fishID);
 
             // turn fishing mode OFF and reset caughtFish to "N/A".
             fishingMode = false;
@@ -103,14 +96,38 @@ public class Player : MonoBehaviour
 
         switch(Fish.fishType)
         {
-            case "Fish":  // FISH LOOT TABLE: just Cod for now..
-                Fish.fishID = "Cod";
+            case "Fish":  // FISH LOOT TABLE:
+                Fish.fishID = "Saltwater Trout";  // by default, start by assuming we caught Saltwater Trout. (50 gold + 25 XP)
+
+                // RNG determines whether or not we get a different kinda fish..
+                if(Random.value < 0.5)
+                    Fish.fishID = "Silver Salmon";  // 100 gold + 50 XP
+                else if(Random.value < 0.25)
+                    Fish.fishID = "Golden Cod";  // 250 gold + 125 XP
+                else if(Random.value < 0.1)
+                    Fish.fishID = "Diamond Angler Fish";  // 1250 gold + 1250 XP
                 break;
-            case "Junk":  // JUNK LOOT TABLE: just Fish Bait for now..
-                Fish.fishID = "Fish Bait";
+            case "Junk":  // JUNK LOOT TABLE:
+                Fish.fishID = "Fish Bait";  // by default, start by assuming we caught Fish Bait. (2X fishing speed, fish more likely)
+
+                // RNG determines whether or not we get different kinda junk..
+                if (Random.value < 0.5)
+                    Fish.fishID = "Junk Bait";  // 2X fishing speed, junk more likely
+                else if (Random.value < 0.25)
+                    Fish.fishID = "Treasure Bait";  // 2X fishing speed, treasure more likely
+                else if (Random.value < 0.1)
+                    Fish.fishID = "Sea Monster Bait";  // 2X fishing speed, sea monster more likely
                 break;
-            case "Treasure":  // TREASURE LOOT TABLE: just Lucky Diamond for now..
-                Fish.fishID = "Lucky Diamond";
+            case "Treasure":  // TREASURE LOOT TABLE:
+                Fish.fishID = "Lucky Diamond";  // by default, start by assuming we caught Lucky Diamond. (5000 gold + 5000 XP)
+
+                // RNG determines whether or not we get different kinda treasure..
+                if (Random.value < 0.5)
+                    Fish.fishID = "Super All-Rounder Bait";  // 4X fishing speed, best loot table drops guaranteed, treasure WAY more likely.
+                else if (Random.value < 0.5)
+                    Fish.fishID = "Permanent Gold & XP Boost";  // depends on fishing level
+                else if (Random.value < 0.25)
+                    Fish.fishID = "Ominous Shadow Onus";  // permanently increases chance of catching Nightmare Orb..
                 break;
             case "Nightmare Orb":  // NIGHTMARE ORB!... Is technically just an orb, so..
                 Fish.fishID = "Nightmare Orb";
