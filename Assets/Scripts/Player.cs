@@ -84,12 +84,14 @@ public class Player : MonoBehaviour
 
         if (Random.value < 0.65)  // 65% chance for Fish!
             Fish.fishType = "Fish";
+        else if (Random.value < 0.25)  // 25% chance for Sea Monster!
+            Fish.fishType = "Sea Monster";
         else if (Random.value < 0.20)  // 20% chance for Treasure!
             Fish.fishType = "Treasure";
         else if (Random.value < (1/1000000000))  // One in a BILLION chance for Nightmare Orb, RAREST DROP IN THE GAME!!
             Fish.fishType = "Nightmare Orb";
         else
-            Fish.fishType = "Junk";  // otherwise, if it ain't fish, treasure, or a nightmare orb.. it's junk!
+            Fish.fishType = "Junk";  // otherwise, if it ain't fish, treasure, sea monster, or a nightmare orb.. it's junk!
 
 
         // PHASE 2 - Based on chosen Fish Type, RNG determines which item we get from that specific loot table..
@@ -97,17 +99,20 @@ public class Player : MonoBehaviour
         switch(Fish.fishType)
         {
             case "Fish":  // FISH LOOT TABLE:
+                
                 Fish.fishID = "Saltwater Trout";  // by default, start by assuming we caught Saltwater Trout. (50 gold + 25 XP)
 
                 // RNG determines whether or not we get a different kinda fish..
                 if(Random.value < 0.5)
                     Fish.fishID = "Silver Salmon";  // 100 gold + 50 XP
-                else if(Random.value < 0.25)
+                else if(Random.value < 0.3)
                     Fish.fishID = "Golden Cod";  // 250 gold + 125 XP
                 else if(Random.value < 0.1)
                     Fish.fishID = "Diamond Angler Fish";  // 1250 gold + 1250 XP
                 break;
+
             case "Junk":  // JUNK LOOT TABLE:
+                
                 Fish.fishID = "Fish Bait";  // by default, start by assuming we caught Fish Bait. (2X fishing speed, fish more likely)
 
                 // RNG determines whether or not we get different kinda junk..
@@ -118,17 +123,33 @@ public class Player : MonoBehaviour
                 else if (Random.value < 0.1)
                     Fish.fishID = "Sea Monster Bait";  // 2X fishing speed, sea monster more likely
                 break;
+
             case "Treasure":  // TREASURE LOOT TABLE:
+                
                 Fish.fishID = "Lucky Diamond";  // by default, start by assuming we caught Lucky Diamond. (5000 gold + 5000 XP)
 
                 // RNG determines whether or not we get different kinda treasure..
-                if (Random.value < 0.5)
+                if (Random.value < 0.25)
                     Fish.fishID = "Super All-Rounder Bait";  // 4X fishing speed, best loot table drops guaranteed, treasure WAY more likely.
-                else if (Random.value < 0.5)
+                else if (Random.value < 0.25)
                     Fish.fishID = "Permanent Gold & XP Boost";  // depends on fishing level
                 else if (Random.value < 0.25)
                     Fish.fishID = "Ominous Shadow Onus";  // permanently increases chance of catching Nightmare Orb..
                 break;
+
+            case "Sea Monster":  // SEA MONSTER LOOT TABLE:
+                
+                Fish.fishID = "Deep Sea Shark";  // by default, start by assuming we caught a Deep Sea Shark. (BUTTON SPAM QTE)
+
+                // RNG determines whether or not we get different kinda sea monsters..
+                if (Random.value < 0.25)
+                    Fish.fishID = "Spike Anvil";  // DODGE QTE
+                else if (Random.value < 0.25)
+                    Fish.fishID = "Sword Monster";  // PARRY QTE
+                else if (Random.value < 0.25)
+                    Fish.fishID = "Lucid Dream Siren";  // PARAPPA QTE
+                break;
+
             case "Nightmare Orb":  // NIGHTMARE ORB!... Is technically just an orb, so..
                 Fish.fishID = "Nightmare Orb";
                 break;

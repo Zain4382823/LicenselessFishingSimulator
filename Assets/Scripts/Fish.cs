@@ -10,7 +10,7 @@ public class Fish : MonoBehaviour
     public static string fishType = "Fish";
 
     // Fish ID -> while FishType is the LOOT TABLE, FishID is the SPECIFIC ITEM we pick FROM THE LOOT TABLE!
-    public static string fishID = "Cod";
+    public static string fishID = "Saltwater Trout";
 
     // SETTING UP SPRITE RENDERER
     public SpriteRenderer spriteRenderer;
@@ -21,6 +21,8 @@ public class Fish : MonoBehaviour
     public Sprite junkSprite;
     // TREASURE SPRITE VARIABLE
     public Sprite treasureSprite;
+    // SEA MONSTER VARIABLE
+    public Sprite seaMonsterSprite;
     // NIGHTMARE ORB VARIABLE
     public Sprite nightmareOrbSprite;
 
@@ -38,11 +40,14 @@ public class Fish : MonoBehaviour
             case "Fish":  // we caught a FISH!
                 spriteRenderer.sprite = fishSprite;  // change object to fish sprite
                 break;
-            case "Junk":  // we caught JUNK!
+            case "Junk":  // we got JUNK!
                 spriteRenderer.sprite = junkSprite;  // change object to junk sprite
                 break;
-            case "Treasure":  // we caught TREASURE!
+            case "Treasure":  // we got TREASURE!
                 spriteRenderer.sprite = treasureSprite;  // change object to treasure sprite
+                break;
+            case "Sea Monster": // we caught a SEA MONSTER!
+                spriteRenderer.sprite = seaMonsterSprite;  // change object to sea monster sprite
                 break;
             case "Nightmare Orb": // we got the NIGHTMARE ORB!
                 spriteRenderer.sprite = nightmareOrbSprite;  // change object to nightmare orb sprite
