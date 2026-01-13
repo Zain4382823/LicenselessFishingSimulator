@@ -9,7 +9,7 @@ public class Fishing : MonoBehaviour
 
     int fishCount = 0;  // when player catches fish, we increment fish count by 1!
 
-    bool fishingMode = false;  // FISHING MODE: player casts line, waits for fish, fish bites hook, then player catches the fish!
+    public static bool fishingMode = false;  // FISHING MODE: player casts line, waits for fish, fish bites hook, then player catches the fish!
     bool fishingModeCooldown = false;  // prevents spamming F key, which confuses the program..
 
     string caughtFish = "N/A";  // catching fish status, triggered when fish bites the hook. used for FishBitesTheHook() enum.
@@ -18,6 +18,8 @@ public class Fishing : MonoBehaviour
 
     // ("N/A") -> Fish does not exist / player already caught fish, so it reset.
     // ("NotCaught") -> Fish has bitten the hook, but player has not caught it yet! if player doesn't catch it in time, the fish gets away!
+
+    bool fishingLeft = false; // is the player fishing on the left side?..
 
     // Start is called before the first frame update
     void Start()
@@ -48,8 +50,15 @@ public class Fishing : MonoBehaviour
             {
                 // turn fishing mode OFF!!
                 fishingMode = false;
-                playerAnim.Play("playerIdle");
+                
+                // SET PLAYER ANIM TO IDLE        
+                if(!fishingLeft)
+                    playerAnim.Play("playerIdle");  // FISHING RIGHT -> stick to default idle anim!
+                else
+                    playerAnim.Play("LeftIdle");  // FISHING LEFT -> use left version instead!
+                
                 Debug.Log("You suddenly decided to stop fishing!");
+
                 // Stop ALL FISHING COROUTINES!!
                 StopCoroutine(WaitingForFish());
                 StopCoroutine(FishBitTheHook());
@@ -66,7 +75,12 @@ public class Fishing : MonoBehaviour
 
             // player successfully caught the fish, increment fish count by 1!
             fishCount++;
-            playerAnim.Play("playerCaughtFish");
+
+            // PLAY CAUGHT FISH ANIMATION!
+            if (!fishingLeft)
+                playerAnim.Play("playerCaughtFish");  // FISHING RIGHT -> stick to default animation!
+            else
+                playerAnim.Play("LeftCaughtFish");  // FISHING LEFT -> use left version instead!
 
             // award base gold & XP as a reward.
             Progression.gold += 50;
@@ -171,8 +185,19 @@ public class Fishing : MonoBehaviour
     IEnumerator WaitingForFish()
     {
         // PLAY SWING BACK ANIMATION -> (IN ANIMATOR..) TRANSITIONS TO FISHING IDLE AFTER 0.5 SECONDS!!
-        playerAnim.Play("playerSwingBack");
+        if (!fishingLeft)
+        {
+            Player.TPToRightFishingSpot = true;  // trigger TPToRightFishingSpot variable in Player.cs, which teleports player to right fishing spot..
+            playerAnim.Play("playerSwingBack");  // RIGHT FISHING -> stick to default animation!
+        }
+        else
+        {
+            Player.TPToLeftFishingSpot = true;  // trigger TPToLeftFishingSpot variable in Player.cs, which teleports player to left fishing spot..
+            playerAnim.Play("LeftSwingBack");  // LEFT FISHING -> use left version instead!
+        }
+
         yield return new WaitForSeconds(0.25f);
+        
         Debug.Log("Line casted! And now, we wait for fish..");
 
         yield return new WaitForSeconds(1.5f);
@@ -200,8 +225,14 @@ public class Fishing : MonoBehaviour
         if (fishingMode)
         {
             caughtFish = "NotCaught";  // signals to the program that a fish bit the hook, but has not been caught.
-            playerAnim.Play("FishBitesHook");
-            Debug.Log("A fish has bitten the hook!! Press C to catch the fish!");
+
+            // FISH BITES HOOK ANIMATION GETS TRIGGERED!
+            if (!fishingLeft)
+                playerAnim.Play("FishBitesHook");  // RIGHT FISHING -> stick to default animation.
+            else
+                playerAnim.Play("LeftFishBitHook"); // LEFT FISHING -> use left version instead!
+
+                Debug.Log("A fish has bitten the hook!! Press C to catch the fish!");
 
             yield return new WaitForSeconds(1f);  // wait 1.5 seconds for player to catch fish..
 
@@ -210,8 +241,13 @@ public class Fishing : MonoBehaviour
                 // turn fishing mode OFF and reset caughtFish to "N/A".
                 fishingMode = false;
                 caughtFish = "N/A";
+                
                 // the fish gets bored and escapes! womp womp..
-                playerAnim.Play("playerIdle");
+                if (!fishingLeft)
+                    playerAnim.Play("playerIdle");  // RIGHT FISHING -> stick to default animation.
+                else
+                    playerAnim.Play("LeftIdle");  // LEFT FISHING -> use left version instead!
+
                 Debug.Log("Oh no! The fish got away!");
             }
         }
