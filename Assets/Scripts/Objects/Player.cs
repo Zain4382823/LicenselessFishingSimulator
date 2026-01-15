@@ -6,31 +6,38 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
-    
+
+    // introduce public variable for player animator, allows us to play animations from script!
+    public Animator playerAnim;
+
     public static bool TPToLeftFishingSpot = false;  // teleport to left fishing spot when player fishes on the left side.
     public static bool TPToRightFishingSpot = false;  // teleport to right fishing spot when player fishes on the right side.
+    
+    float HorizontalInput;
+    float VerticalInput;
 
-    const float moveSpeed = 0.006f;
+    const float moveSpeed = 4.5f;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // WASD MOVEMENT INPUTS -> FISHING MODE MUST BE OFF!!
-        if (Input.GetKey(KeyCode.W) && !Fishing.fishingMode)  // MOVE UP
-            transform.position = transform.position + new Vector3(0,moveSpeed,0);  // Y INCREMENT
-        if (Input.GetKey(KeyCode.A) && !Fishing.fishingMode) // MOVE LEFT
-            transform.position = transform.position + new Vector3(-moveSpeed,0,0);  // X DECREMENT
-        if (Input.GetKey(KeyCode.S) && !Fishing.fishingMode) // MOVE DOWN
-            transform.position = transform.position + new Vector3(0,-moveSpeed,0);  // Y DECREMENT
-        if (Input.GetKey(KeyCode.D) && !Fishing.fishingMode)  // MOVE RIGHT
-            transform.position = transform.position + new Vector3(moveSpeed,0,0);  // X INCREMENT
+        // HANDLING PLAYER MOVEMENT VIA RIGIDBODY
+        HorizontalInput = Input.GetAxis("Horizontal");
+        VerticalInput = Input.GetAxis("Vertical");
 
+        // SET RB VELOCITY TO WHATEVER HORIZONTAL / VERTICAL INPUT THE PLAYER IS GIVING US TIMES BY MOVE SPEED.
+        rb.velocity = new Vector2 (HorizontalInput * moveSpeed, VerticalInput * moveSpeed);
+
+        // UPDATE xVelocity AND yVelocity PARAMETERS IN PLAYER ANIMATOR
+        playerAnim.SetFloat("xVelocity", rb.velocity.x);
+        playerAnim.SetFloat("yVelocity", rb.velocity.y);
 
         // TELEPORT TO RIGHT FISHING SPOT!
         if (TPToRightFishingSpot)  // when Fishing.cs triggers right fishing spot teleport in Player.cs..
