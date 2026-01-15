@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    Rigidbody2D rb;
+    
     public static bool TPToLeftFishingSpot = false;  // teleport to left fishing spot when player fishes on the left side.
     public static bool TPToRightFishingSpot = false;  // teleport to right fishing spot when player fishes on the right side.
 
@@ -13,7 +15,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
