@@ -32,11 +32,14 @@ public class Player : MonoBehaviour
         HorizontalInput = Input.GetAxis("Horizontal");
         VerticalInput = Input.GetAxis("Vertical");
 
-        // SET RB VELOCITY TO WHATEVER HORIZONTAL / VERTICAL INPUT THE PLAYER IS GIVING US TIMES BY MOVE SPEED.
-        rb.velocity = new Vector2 (HorizontalInput * moveSpeed, VerticalInput * moveSpeed);
+        // (If Fishing Mode is OFF) -> SET RB VELOCITY TO WHATEVER HORIZONTAL / VERTICAL INPUT THE PLAYER IS GIVING US TIMES BY MOVE SPEED.
+        if(!Fishing.fishingMode)
+            rb.velocity = new Vector2 (HorizontalInput * moveSpeed, VerticalInput * moveSpeed);
+        else
+            rb.velocity = Vector2.zero;  // PLAYER CAN'T MOVE WHILE THEY'RE IN FISHING MODE! IT'S NOT ALLOWED!!
 
-        // UPDATE xVelocity AND yVelocity PARAMETERS IN PLAYER ANIMATOR
-        playerAnim.SetFloat("xVelocity", rb.velocity.x);
+            // UPDATE xVelocity AND yVelocity PARAMETERS IN PLAYER ANIMATOR
+            playerAnim.SetFloat("xVelocity", rb.velocity.x);
         playerAnim.SetFloat("yVelocity", rb.velocity.y);
 
         // TELEPORT TO RIGHT FISHING SPOT!
