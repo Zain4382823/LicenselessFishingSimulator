@@ -12,7 +12,10 @@ public class Player : MonoBehaviour
 
     public static bool TPToLeftFishingSpot = false;  // teleport to left fishing spot when player fishes on the left side.
     public static bool TPToRightFishingSpot = false;  // teleport to right fishing spot when player fishes on the right side.
-    
+    public static bool bounce = false; // the player will bounce when a fish bites the hook, or when they catch a fish.
+
+    public static float bounceHeight; // how high can they bounce? Fishing.cs sets this to 3 for fish bites hook, and 6 for catching fish!
+
     float HorizontalInput;
     float VerticalInput;
 
@@ -38,10 +41,17 @@ public class Player : MonoBehaviour
         else
             rb.velocity = Vector2.zero;  // PLAYER CAN'T MOVE WHILE THEY'RE IN FISHING MODE! IT'S NOT ALLOWED!!
 
-            // UPDATE xVelocity AND yVelocity PARAMETERS IN PLAYER ANIMATOR
-            playerAnim.SetFloat("xVelocity", rb.velocity.x);
+        // UPDATE xVelocity AND yVelocity PARAMETERS IN PLAYER ANIMATOR
+        playerAnim.SetFloat("xVelocity", rb.velocity.x);
         playerAnim.SetFloat("yVelocity", rb.velocity.y);
 
+
+        // CHECK IF BOUNCE ANIMATION HAS BEEN TRIGGERED!
+        if (bounce)
+        {
+            Bounce(bounceHeight);  // play Bounce anim, using the bounce height Fishing.cs gave us..
+            bounce = false; // don't forget to deactivate the trigger variable!
+        }
         // TELEPORT TO RIGHT FISHING SPOT!
         if (TPToRightFishingSpot)  // when Fishing.cs triggers right fishing spot teleport in Player.cs..
         {
@@ -54,5 +64,11 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-2.5f, 0, 0);  // teleport player to left fishing position..
             TPToLeftFishingSpot = false;  // remember to deactivate trigger variable!
         }
+    }
+
+    // BOUNCE -> Bounce animation plays when a fish bites the hook, (3 bounce height) OR the player catches a fish! (6 bounce height)
+    void Bounce(float bounceHeight)
+    {
+
     }
 }
