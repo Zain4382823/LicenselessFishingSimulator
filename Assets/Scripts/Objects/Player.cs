@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
         // CHECK IF BOUNCE ANIMATION HAS BEEN TRIGGERED!
         if (bounce)
         {
-            Bounce(bounceHeight);  // play Bounce anim, using the bounce height Fishing.cs gave us..
+            StartCoroutine(Bounce(bounceHeight));  // play Bounce anim, using the bounce height Fishing.cs gave us..
             bounce = false; // don't forget to deactivate the trigger variable!
         }
         // TELEPORT TO RIGHT FISHING SPOT!
@@ -66,9 +66,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    // BOUNCE -> Bounce animation plays when a fish bites the hook, (3 bounce height) OR the player catches a fish! (6 bounce height)
-    void Bounce(float bounceHeight)
+    // BOUNCE -> Bounce animation plays when a fish bites the hook, (2 bounce height) OR the player catches a fish! (5 bounce height)
+    IEnumerator Bounce(float bounceHeight)
     {
-
+        // MOVE THE PLAYER UP!
+        for(int i = 1; i <= bounceHeight; i++)
+        {
+            transform.position = transform.position + new Vector3(0, 0.12f, 0);
+            yield return new WaitForSeconds(0.025f);
+        }
+        // MOVE THE PLAYER BACK DOWN!
+        for (int i = 1; i <= bounceHeight; i++)
+        {
+            transform.position = transform.position + new Vector3(0, -0.12f, 0);
+            yield return new WaitForSeconds(0.025f);
+        }
     }
 }

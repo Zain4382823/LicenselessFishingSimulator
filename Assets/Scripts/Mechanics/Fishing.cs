@@ -82,9 +82,9 @@ public class Fishing : MonoBehaviour
             else
                 playerAnim.Play("LeftCaughtFish");  // FISHING LEFT -> use left version instead!
 
-            // PLAYER BOUNCE ANIMATION ALSO GETS TRIGGERED (bounce = true, bounceHeight = 6)
+            // PLAYER BOUNCE ANIMATION ALSO GETS TRIGGERED (bounce = true, bounceHeight = 7)
             Player.bounce = true;
-            Player.bounceHeight = 6;
+            Player.bounceHeight = 7;
 
             // award base gold & XP as a reward.
             Progression.gold += 50;
