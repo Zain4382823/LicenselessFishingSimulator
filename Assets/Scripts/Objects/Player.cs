@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    // BOUNCE -> Bounce animation plays when a fish bites the hook, (2 bounce height) OR the player catches a fish! (5 bounce height)
+    // BOUNCE -> Bounce animation plays when a fish bites the hook, (3 bounce height) OR the player catches a fish! (7 bounce height)
     IEnumerator Bounce(float bounceHeight)
     {
         // MOVE THE PLAYER UP!
