@@ -82,6 +82,10 @@ public class Fishing : MonoBehaviour
             else
                 playerAnim.Play("LeftCaughtFish");  // FISHING LEFT -> use left version instead!
 
+            // PLAYER BOUNCE ANIMATION ALSO GETS TRIGGERED (bounce = true, bounceHeight = 6)
+            Player.bounce = true;
+            Player.bounceHeight = 6;
+
             // award base gold & XP as a reward.
             Progression.gold += 50;
             Progression.XP += 25;
@@ -232,7 +236,11 @@ public class Fishing : MonoBehaviour
             else
                 playerAnim.Play("LeftFishBitHook"); // LEFT FISHING -> use left version instead!
 
-                Debug.Log("A fish has bitten the hook!! Press C to catch the fish!");
+            // PLAYER BOUNCE ANIMATION ALSO GETS TRIGGERED (bounce = true, bounceHeight = 3)
+            Player.bounce = true;
+            Player.bounceHeight = 3;
+
+            Debug.Log("A fish has bitten the hook!! Press C to catch the fish!");
 
             yield return new WaitForSeconds(1f);  // wait 1.5 seconds for player to catch fish..
 
