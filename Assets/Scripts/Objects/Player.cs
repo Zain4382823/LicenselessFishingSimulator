@@ -10,16 +10,24 @@ public class Player : MonoBehaviour
     // introduce public variable for player animator, allows us to play animations from script!
     public Animator playerAnim;
 
-    public static bool TPToLeftFishingSpot = false;  // teleport to left fishing spot when player fishes on the left side.
-    public static bool TPToRightFishingSpot = false;  // teleport to right fishing spot when player fishes on the right side.
-    public static bool bounce = false; // the player will bounce when a fish bites the hook, or when they catch a fish.
+    // teleport to left fishing spot when player fishes on the left side.
+    public static bool TPToLeftFishingSpot = false;
+    // teleport to right fishing spot when player fishes on the right side.
+    public static bool TPToRightFishingSpot = false;
 
-    public static float bounceHeight; // how high can they bounce? Fishing.cs sets this to 3 for fish bites hook, and 6 for catching fish!
+    // the player will bounce when a fish bites the hook, or when they catch a fish.
+    public static bool bounce = false;
+    // how high can they bounce? Fishing.cs sets this to 3 for fish bites hook, and 6 for catching fish!
+    public static float bounceHeight;
+
+    // if player fails monster QTE, this gets set to true and Death() Coroutine gets triggered!
+    public static bool isDead = false;
 
     float HorizontalInput;
     float VerticalInput;
 
     const float moveSpeed = 4.5f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -81,5 +89,12 @@ public class Player : MonoBehaviour
             transform.position = transform.position + new Vector3(0, -0.12f, 0);
             yield return new WaitForSeconds(0.025f);
         }
+    }
+
+    // DEATH -> Set player sprite to dead sprite, wait 2 seconds and then respawn the player. (set back to idle sprite)
+    IEnumerator Death()
+    {
+        Debug.Log("You are dead. Not big suprise.");
+        yield return new WaitForSeconds(1f);
     }
 }
