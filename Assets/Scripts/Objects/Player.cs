@@ -72,6 +72,12 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-2.5f, 0, 0);  // teleport player to left fishing position..
             TPToLeftFishingSpot = false;  // remember to deactivate trigger variable!
         }
+        // CHECK FOR PLAYER DEATH
+        if (isDead)
+        {
+            StartCoroutine(Death());  // start Death coroutine!
+            isDead = false;  // deactivate trigger variable!
+        }
     }
 
     // BOUNCE -> Bounce animation plays when a fish bites the hook, (3 bounce height) OR the player catches a fish! (7 bounce height)
