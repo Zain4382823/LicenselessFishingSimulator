@@ -21,7 +21,9 @@ public class Player : MonoBehaviour
     public static float bounceHeight;
 
     // if player fails monster QTE, this gets set to true and Death() Coroutine gets triggered!
-    public static bool isDead = false;
+    public static bool triggerDeath = false;
+    // is the player dead? this variable STAYS true for as long as the player is dead, ensuring that they can't move while dead. 
+    bool isDead = false;
 
     float HorizontalInput;
     float VerticalInput;
@@ -43,11 +45,11 @@ public class Player : MonoBehaviour
         HorizontalInput = Input.GetAxis("Horizontal");
         VerticalInput = Input.GetAxis("Vertical");
 
-        // (If Fishing Mode is OFF) -> SET RB VELOCITY TO WHATEVER HORIZONTAL / VERTICAL INPUT THE PLAYER IS GIVING US TIMES BY MOVE SPEED.
-        if(!Fishing.fishingMode)
+        // (If Fishing Mode is OFF & Player is NOT dead) -> SET RB VELOCITY TO WHATEVER HORIZONTAL / VERTICAL INPUT THE PLAYER IS GIVING US TIMES BY MOVE SPEED.
+        if(!Fishing.fishingMode && !isDead)
             rb.velocity = new Vector2 (HorizontalInput * moveSpeed, VerticalInput * moveSpeed);
         else
-            rb.velocity = Vector2.zero;  // PLAYER CAN'T MOVE WHILE THEY'RE IN FISHING MODE! IT'S NOT ALLOWED!!
+            rb.velocity = Vector2.zero;  // PLAYER CAN'T MOVE WHILE THEY'RE IN FISHING MODE! (OR IF THEY'RE DEAD) IT'S NOT ALLOWED!!
 
         // UPDATE xVelocity AND yVelocity PARAMETERS IN PLAYER ANIMATOR
         playerAnim.SetFloat("xVelocity", rb.velocity.x);
@@ -73,10 +75,10 @@ public class Player : MonoBehaviour
             TPToLeftFishingSpot = false;  // remember to deactivate trigger variable!
         }
         // CHECK FOR PLAYER DEATH
-        if (isDead)
+        if (triggerDeath)
         {
             StartCoroutine(Death());  // start Death coroutine!
-            isDead = false;  // deactivate trigger variable!
+            triggerDeath = false;  // deactivate trigger variable!
         }
     }
 
@@ -100,7 +102,17 @@ public class Player : MonoBehaviour
     // DEATH -> Set player sprite to dead sprite, wait 2 seconds and then respawn the player. (set back to idle sprite)
     IEnumerator Death()
     {
+        // PLAY DEATH ANIMATION AND SEND DEBUG LOG CONFIRMING DEATH!
+        playerAnim.Play("deadPlayer");
         Debug.Log("You are dead. Not big suprise.");
-        yield return new WaitForSeconds(1f);
+        isDead = true;
+
+        // WAIT 2 SECONDS..
+        yield return new WaitForSeconds(1.75f);
+
+        // PLAY IDLE ANIMATION AND RESPAWN PLAYER AT THE TOP OF THE ROOM.
+        playerAnim.Play("DownIdle");
+        transform.position = new Vector3(0, 4.4f, 0);  // teleport player to the top of the room..
+        isDead = false;
     }
 }
