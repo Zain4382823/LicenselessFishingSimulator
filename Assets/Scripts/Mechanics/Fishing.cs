@@ -176,6 +176,21 @@ public class Fishing : MonoBehaviour
                 Fish.fishID = "Nightmare Orb";
                 break;
         }
+
+        // PHASE 3 - ACTIVATE SEA MONSTERS!! (Depending on Fish ID)
+
+        switch (Fish.fishID)
+        {
+            case "Deep Sea Shark":
+                DeepSeaShark.isActive = 1;  // ACTIVATE DEEP SEA SHARK!!!
+                break;
+            case "Spike Anvil":
+                break;
+            case "Sword Monster":
+                break;
+            case "Lucid Dream Siren":
+                break;
+        }
     }
 
     // COOLDOWN TIMER -> player is not allowed to spam F key, must wait a bit before toggling fishing mode ON / OFF!
