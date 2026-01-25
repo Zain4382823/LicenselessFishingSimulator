@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class DeepSeaShark : MonoBehaviour
 {
+    // isActive values:  [0] -> Not active  [1] -> Activation triggered  [2] -> Active
+    public static int isActive = 0;
+
+    // STRUGGLEPOINTS -> COUNTS HOW MANY TIMES PLAYER MASHES LEFT CLICK DURING QTE!
+    int strugglePoints = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +21,10 @@ public class DeepSeaShark : MonoBehaviour
     void Update()
     {
         
+    }
+
+    IEnumerator ButtonMashQTE()
+    {
+        yield return new WaitForSeconds(4f);
     }
 }
