@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DeepSeaShark : MonoBehaviour
 {
-    // SET UP SEA MONSTER GAME OBJECT - SO THAT WE CAN ACTIVATE IT
-    public GameObject SeaMonster;
+    // SET UP OBJECT RENDERER - SO THAT WE CAN HIDE / REVEAL SEA MONSTERS
+    private Renderer objRenderer;
 
     // isActive values:  [0] -> Not active  [1] -> Activation triggered  [2] -> Active
     public static int isActive = 0;
@@ -17,7 +17,8 @@ public class DeepSeaShark : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Get the Renderer component attached to this GameObject
+        objRenderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -26,8 +27,8 @@ public class DeepSeaShark : MonoBehaviour
         // ACTIVATION CHECK -> Spawn monster in, set strugglepoints to 0 and start ButtonMashQTE Coroutine!
         if(isActive == 1)
         {
-            // activate sea monster object, make the monster visible!
-            SeaMonster.SetActive(true);
+            // set objRenderer.enabled to true, which makes the monster visible!
+            objRenderer.enabled = true;
             // reset strugglePoints back to zero!
             strugglePoints = 0;
             // start ButtonMashQTE coroutine!
@@ -37,7 +38,7 @@ public class DeepSeaShark : MonoBehaviour
         }
 
         // LEFT MOUSE BUTTON CHECK - GRANTS STRUGGLE POINTS IF DEEP SEA SHARK IS ACTIVE
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButtonDown(0))
         {
             if(isActive == 2)
                 strugglePoints += 25;  // player gets 25 struggle points with each left click!
@@ -50,22 +51,30 @@ public class DeepSeaShark : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
-        // DOES THE PLAYER HAVE MORE THAN 500 STRUGGLE POINTS??
+        // DOES THE PLAYER HAVE MORE THAN 400 STRUGGLE POINTS??
         
-        if (strugglePoints > 500)  // IF THEY DO...
+        if (strugglePoints > 400)  // IF THEY DO...
         {
             // PLAYER WINS! REWARD THEM 500 GOLD AND 500 XP!
-            Progression.gold += 500;
-            Progression.XP += 500;
-            // ALSO DEACTIVATE THE DEEP SEA SHARK.
-            SeaMonster.SetActive(false);
+            Progression.gold += strugglePoints;
+            Progression.XP += strugglePoints;
+            
+            // ALSO HIDE THE DEEP SEA SHARK BY DISABLING OBJECT RENDERER!
+            objRenderer.enabled = false;
+
+            // SEND DEBUG LOG SIGNALLING THAT THE PLAYER WON!
+            Debug.LogFormat("YOU SURVIVED!! You won {0} Gold and {0} XP!", strugglePoints);
         }
         else  // BUT IF THE PLAYER DOESN'T HAVE ENOUGH STRUGGLE POINTS...
         {
             // DEEP SEA SHARK WINS! KILL THE PLAYER!
             Player.triggerDeath = true;
-            // ALSO DEACTIVATE THE DEEP SEA SHARK.
-            SeaMonster.SetActive(false);
+
+            // ALSO HIDE THE DEEP SEA SHARK BY DISABLING OBJECT RENDERER!
+            objRenderer.enabled = false;
+            
+            // SEND DEBUG LOG SIGNALLING THAT THE PLAYER LOST!
+            Debug.Log("OUCH! You died to the Deep Sea Shark..");
         }
     }
 }
