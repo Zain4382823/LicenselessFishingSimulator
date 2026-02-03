@@ -26,6 +26,16 @@ public class SpikeAnvil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // ACTIVATION TRIGGER CHECK
+        if(isActive == 1)
+        {
+            StartCoroutine(Attack());  // LOAD UP ATTACK COROUTINE!
+            isActive = 2;  // SET ISACTIVE VARIABLE TO 2, ["Active"], TO PREVENT ENDLESS LOOPING!
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(2f);
     }
 }
