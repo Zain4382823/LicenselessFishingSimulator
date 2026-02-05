@@ -29,6 +29,7 @@ public class SpikeAnvil : MonoBehaviour
         // ACTIVATION TRIGGER CHECK
         if(isActive == 1)
         {
+            attacksLeft = 2;  // when activated, Spike Anvil gets 2 anvil attacks on the player!
             StartCoroutine(Attack());  // LOAD UP ATTACK COROUTINE!
             isActive = 2;  // SET ISACTIVE VARIABLE TO 2, ["Active"], TO PREVENT ENDLESS LOOPING!
         }
@@ -36,6 +37,10 @@ public class SpikeAnvil : MonoBehaviour
 
     IEnumerator Attack()
     {
-        yield return new WaitForSeconds(2f);
+        while (attacksLeft > 0)
+        {
+            // spawn in Anvil Hitman prefab!
+            yield return new WaitForSeconds(2f);
+        }
     }
 }
