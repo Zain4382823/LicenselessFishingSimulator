@@ -36,6 +36,18 @@ public class AnvilHitman : MonoBehaviour
         // 50% chance to switch to Left direction instead!
         if (Random.value < 0.5)
             Direction = "Left";
+
+        // SPAWN ANVIL HITMAN IN BOTTOM LEFT / RIGHT POSITION BASED ON DIRECTION VALUE!!
+        if (Direction == "Right")
+            rb.position = new Vector3(10.79f, -5.524f, 0f);  // BOTTOM RIGHT POSITION : (10.79, -5.524, 0)
+        else
+            rb.position = new Vector3(-10.419f, -5.524f, 0f);  // BOTTOM LEFT POSITION : (-10.419, -5.524, 0)
+
+        // MAKE ANVIL HITMAN MOVE DIAGONALLY! SETTING RB VELOCITY BASED ON DIRECTION!!
+        if(Direction == "Right")
+            rb.velocity = new Vector2(-1,1) * moveSpeed;  // Right Direction -> FLY UP-LEFT!!
+        else
+            rb.velocity = new Vector2(1, 1) * moveSpeed; // Left Direction -> FLY UP-RIGHT!!
     }
 
     // Update is called once per frame
