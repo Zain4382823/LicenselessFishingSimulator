@@ -82,6 +82,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))  // colliding with enemy tag = YOU DIE!!
+        {
+            StartCoroutine(Death());
+        }
+    }
+
     // BOUNCE -> Bounce animation plays when a fish bites the hook, (3 bounce height) OR the player catches a fish! (7 bounce height)
     IEnumerator Bounce(float bounceHeight)
     {

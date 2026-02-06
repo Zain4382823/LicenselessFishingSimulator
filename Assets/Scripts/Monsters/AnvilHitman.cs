@@ -14,7 +14,7 @@ public class AnvilHitman : MonoBehaviour
     public Sprite angry;
 
     // ITS SPEED!! multiply this by the direction the Anvil Hitman's going in!
-    float moveSpeed = 10f;
+    float moveSpeed = 15f;
 
     // ALL ATTACK STAGES -> {1 - Rising up} {2 - Searching for player} {3 - Falling onto player}
     int attackStage = 1;
