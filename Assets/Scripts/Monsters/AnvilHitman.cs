@@ -14,7 +14,7 @@ public class AnvilHitman : MonoBehaviour
     public Sprite angry;
 
     // ITS SPEED!! multiply this by the direction the Anvil Hitman's going in!
-    float moveSpeed = 5f;
+    float moveSpeed = 10f;
 
     // ALL ATTACK STAGES -> {1 - Rising up} {2 - Searching for player} {3 - Falling onto player}
     int attackStage = 1;
@@ -37,22 +37,47 @@ public class AnvilHitman : MonoBehaviour
         if (Random.value < 0.5)
             Direction = "Left";
 
-        // SPAWN ANVIL HITMAN IN BOTTOM LEFT / RIGHT POSITION BASED ON DIRECTION VALUE!!
-        if (Direction == "Right")
-            rb.position = new Vector3(10.79f, -5.524f, 0f);  // BOTTOM RIGHT POSITION : (10.79, -5.524, 0)
-        else
-            rb.position = new Vector3(-10.419f, -5.524f, 0f);  // BOTTOM LEFT POSITION : (-10.419, -5.524, 0)
-
-        // MAKE ANVIL HITMAN MOVE DIAGONALLY! SETTING RB VELOCITY BASED ON DIRECTION!!
-        if(Direction == "Right")
-            rb.velocity = new Vector2(-1,1) * moveSpeed;  // Right Direction -> FLY UP-LEFT!!
-        else
-            rb.velocity = new Vector2(1, 1) * moveSpeed; // Left Direction -> FLY UP-RIGHT!!
+        // SPAWN TELEPORT & SET VELOCITY BASED ON DIRECTION!!
+        switch (Direction)
+        {
+            case "Right":
+                rb.position = new Vector3(10.79f, -5.524f, 0f);  // BOTTOM RIGHT SPAWN POSITION : (10.79, -5.524, 0)
+                rb.velocity = new Vector2(-1, 1) * moveSpeed;  // Bottom Right Spawn -> FLY UP-LEFT!!
+                break;
+            case "Left":
+                rb.position = new Vector3(-11.75f, -5.5f, 0f);  // BOTTOM LEFT SPAWN POSITION : (-11.75, -5.5, 0)
+                rb.velocity = new Vector2(1, 1) * moveSpeed;  // Bottom Left Spawn -> FLY UP-RIGHT!!
+                break;
+        }    
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // IF SPIKE ANVIL REACHES MAX HEIGHT, MAKE IT STOP!!
+        if (rb.position.y >= 3.75 && attackStage == 1)   // MAX Y LIMIT : (3.75)
+        {
+            // STOP!!!
+            rb.velocity = Vector2.zero;
+            attackStage = 2;
+
+            StartCoroutine(SearchForPlayer());
+        }
+    }
+
+    IEnumerator SearchForPlayer()
+    {
+        // Wait a bit, this will give us time to check if player's already under Anvil Hitman..
+        yield return new WaitForSeconds(0.025f);
+
+        // ONLY SEARCH FOR THE PLAYER IF THEY AREN'T ALREADY UNDERNEATH ANVIL HITMAN!
+        if (Direction == "Right" && attackStage == 2)
+        {
+            rb.velocity = Vector2.left * moveSpeed;  // Coming from the right, Anvil Hitman searches LEFTWARDS!!!
+        }
+        else if (Direction == "Left" && attackStage == 2)
+        {
+            rb.velocity = Vector2.right * moveSpeed;  // Coming from the left, Anvil Hitman searches RIGHTWARDS!!!
+        }
     }
 }
