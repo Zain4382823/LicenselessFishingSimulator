@@ -13,6 +13,9 @@ public class AnvilHitman : MonoBehaviour
     // set up angry sprite!
     public Sprite angry;
 
+    // ITS SPEED!! multiply this by the direction the Anvil Hitman's going in!
+    float moveSpeed = 5f;
+
     // ALL ATTACK STAGES -> {1 - Rising up} {2 - Searching for player} {3 - Falling onto player}
     int attackStage = 1;
 
@@ -29,6 +32,10 @@ public class AnvilHitman : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // setup sprite renderer component!
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 50% chance to switch to Left direction instead!
+        if (Random.value < 0.5)
+            Direction = "Left";
     }
 
     // Update is called once per frame
