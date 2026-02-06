@@ -11,7 +11,7 @@ public class AnvilHitman : MonoBehaviour
     SpriteRenderer spriteRenderer;
     
     // set up angry sprite!
-    public Sprite angry;
+    public Sprite angrySprite;
 
     // ITS SPEED!! multiply this by the direction the Anvil Hitman's going in!
     float moveSpeed = 15f;
@@ -62,6 +62,26 @@ public class AnvilHitman : MonoBehaviour
             attackStage = 2;
 
             StartCoroutine(SearchForPlayer());
+        }
+
+        // IF PLAYER IS BELOW ANVIL HITMAN, IT STOPS AND FALLS DOWN ON THE PLAYER
+        if (playerDetected && attackStage == 2)
+        {
+            // STOP!!!
+            rb.velocity = Vector2.zero;
+            // Anvil Hitman is now 200% MAD!
+            spriteRenderer.sprite = angrySprite;
+
+            // THE ANVIL COMES ANGRILY CRASHING DOWN ON YOU!
+            rb.velocity = Vector2.down * moveSpeed;
+            // Update attack stage to 3, this where it's actively trying to kill the player.
+            attackStage = 3;
+        }
+
+        // WHEN THE ANVIL HITMAN GOES TOO FAR DOWN, DELETE IT!!
+        if (rb.position.y < -25)
+        {
+            Destroy(gameObject);  // Anvil Hitman deletes itself from existence when going out of bounds!
         }
     }
 
