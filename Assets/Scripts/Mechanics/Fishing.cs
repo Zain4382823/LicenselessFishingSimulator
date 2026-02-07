@@ -185,6 +185,7 @@ public class Fishing : MonoBehaviour
                 DeepSeaShark.isActive = 1;  // ACTIVATE DEEP SEA SHARK!!!
                 break;
             case "Spike Anvil":
+                SpikeAnvil.isActive = 1;  // ACTIVATE SPIKE ANVIL!!!!
                 break;
             case "Sword Monster":
                 break;
