@@ -88,6 +88,11 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Death());
         }
+        else if (other.CompareTag("PlayerDetector"))  // colliding with player detector = anvil detects player below, delete the detector!
+        {
+            AnvilHitman.playerDetected = true;
+            Destroy(other.gameObject);
+        }
     }
 
     // BOUNCE -> Bounce animation plays when a fish bites the hook, (3 bounce height) OR the player catches a fish! (7 bounce height)

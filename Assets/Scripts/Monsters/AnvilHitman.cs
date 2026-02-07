@@ -23,7 +23,7 @@ public class AnvilHitman : MonoBehaviour
     string Direction = "Right";
 
     // when player is directly below the Anvil Hitman, this variable is set to true!
-    bool playerDetected = false;
+    public static bool playerDetected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +41,11 @@ public class AnvilHitman : MonoBehaviour
         switch (Direction)
         {
             case "Right":
-                rb.position = new Vector3(10.79f, -5.524f, 0f);  // BOTTOM RIGHT SPAWN POSITION : (10.79, -5.524, 0)
+                rb.position = new Vector3(11.1f, -5.524f, 0f);  // BOTTOM RIGHT SPAWN POSITION : (10.79, -5.524, 0)
                 rb.velocity = new Vector2(-1, 1) * moveSpeed;  // Bottom Right Spawn -> FLY UP-LEFT!!
                 break;
             case "Left":
-                rb.position = new Vector3(-11.75f, -5.5f, 0f);  // BOTTOM LEFT SPAWN POSITION : (-11.75, -5.5, 0)
+                rb.position = new Vector3(-12.25f, -5.5f, 0f);  // BOTTOM LEFT SPAWN POSITION : (-11.75, -5.5, 0)
                 rb.velocity = new Vector2(1, 1) * moveSpeed;  // Bottom Left Spawn -> FLY UP-RIGHT!!
                 break;
         }    
@@ -55,7 +55,7 @@ public class AnvilHitman : MonoBehaviour
     void Update()
     {
         // IF SPIKE ANVIL REACHES MAX HEIGHT, MAKE IT STOP!!
-        if (rb.position.y >= 3.75 && attackStage == 1)   // MAX Y LIMIT : (3.75)
+        if (rb.position.y >= 4 && attackStage == 1)   // MAX Y LIMIT : (3.75)
         {
             // STOP!!!
             rb.velocity = Vector2.zero;
@@ -67,19 +67,16 @@ public class AnvilHitman : MonoBehaviour
         // IF PLAYER IS BELOW ANVIL HITMAN, IT STOPS AND FALLS DOWN ON THE PLAYER
         if (playerDetected && attackStage == 2)
         {
-            // STOP!!!
-            rb.velocity = Vector2.zero;
             // Anvil Hitman is now 200% MAD!
             spriteRenderer.sprite = angrySprite;
-
-            // THE ANVIL COMES ANGRILY CRASHING DOWN ON YOU!
-            rb.velocity = Vector2.down * moveSpeed;
             // Update attack stage to 3, this where it's actively trying to kill the player.
             attackStage = 3;
+            // Add a little delay, giving the player some time to react & for Anvil Hitman to properly line up in the middle of player!
+            StartCoroutine(ComeCrashingDown());
         }
 
         // WHEN THE ANVIL HITMAN GOES TOO FAR DOWN, DELETE IT!!
-        if (rb.position.y < -25)
+        if (rb.position.y < -100)
         {
             Destroy(gameObject);  // Anvil Hitman deletes itself from existence when going out of bounds!
         }
@@ -88,7 +85,7 @@ public class AnvilHitman : MonoBehaviour
     IEnumerator SearchForPlayer()
     {
         // Wait a bit, this will give us time to check if player's already under Anvil Hitman..
-        yield return new WaitForSeconds(0.025f);
+        yield return new WaitForSeconds(0.05f);
 
         // ONLY SEARCH FOR THE PLAYER IF THEY AREN'T ALREADY UNDERNEATH ANVIL HITMAN!
         if (Direction == "Right" && attackStage == 2)
@@ -99,5 +96,17 @@ public class AnvilHitman : MonoBehaviour
         {
             rb.velocity = Vector2.right * moveSpeed;  // Coming from the left, Anvil Hitman searches RIGHTWARDS!!!
         }
+    }
+
+    IEnumerator ComeCrashingDown()
+    {
+        // Wait a bit.
+        yield return new WaitForSeconds(0.035f);
+
+        // STOP!!!
+        rb.velocity = Vector2.zero;
+
+        // THE ANVIL COMES ANGRILY CRASHING DOWN ON YOU!
+        rb.velocity = Vector2.down * moveSpeed * 0.85f;
     }
 }
