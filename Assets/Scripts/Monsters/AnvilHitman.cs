@@ -71,12 +71,14 @@ public class AnvilHitman : MonoBehaviour
             spriteRenderer.sprite = angrySprite;
             // Update attack stage to 3, this where it's actively trying to kill the player.
             attackStage = 3;
+            // Set playerDetected to false, so other anvils don't instantly fall as well!!
+            playerDetected = false;
             // Add a little delay, giving the player some time to react & for Anvil Hitman to properly line up in the middle of player!
             StartCoroutine(ComeCrashingDown());
         }
 
         // WHEN THE ANVIL HITMAN GOES TOO FAR DOWN, DELETE IT!!
-        if (rb.position.y < -100)
+        if (rb.position.y < -7.5)
         {
             Destroy(gameObject);  // Anvil Hitman deletes itself from existence when going out of bounds!
         }
@@ -101,12 +103,12 @@ public class AnvilHitman : MonoBehaviour
     IEnumerator ComeCrashingDown()
     {
         // Wait a bit.
-        yield return new WaitForSeconds(0.035f);
+        yield return new WaitForSeconds(0.04f);
 
         // STOP!!!
         rb.velocity = Vector2.zero;
 
         // THE ANVIL COMES ANGRILY CRASHING DOWN ON YOU!
-        rb.velocity = Vector2.down * moveSpeed * 0.85f;
+        rb.velocity = Vector2.down * moveSpeed * 0.9f;
     }
 }

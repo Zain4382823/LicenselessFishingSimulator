@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 public class SpikeAnvil : MonoBehaviour
 {
-    // SET UP OBJECT RENDERER - SO THAT WE CAN HIDE / REVEAL SEA MONSTERS
-    private Renderer objRenderer;
+    // SET UP ANVIL HITMAN PREFAB - SO WE CAN KEEP SPAWNING THEM IN VIA SCRIPT!!
+    public GameObject anvilHitman;
 
     // isActive values:  [0] -> Not active  [1] -> Activation triggered  [2] -> Active
     public static int isActive = 0;
@@ -29,7 +31,7 @@ public class SpikeAnvil : MonoBehaviour
         // ACTIVATION TRIGGER CHECK
         if(isActive == 1)
         {
-            attacksLeft = 2;  // when activated, Spike Anvil gets 2 anvil attacks on the player!
+            attacksLeft = 3;  // when activated, Spike Anvil gets 3 anvil attacks on the player!
             StartCoroutine(Attack());  // LOAD UP ATTACK COROUTINE!
             isActive = 2;  // SET ISACTIVE VARIABLE TO 2, ["Active"], TO PREVENT ENDLESS LOOPING!
         }
@@ -39,8 +41,11 @@ public class SpikeAnvil : MonoBehaviour
     {
         while (attacksLeft > 0)
         {
-            // spawn in Anvil Hitman prefab!
-            yield return new WaitForSeconds(2f);
+            // spawn in Anvil Hitman prefab! (Decrement attacks left with each one spawned)
+            Instantiate(anvilHitman, new Vector3(0,10,0) , quaternion.identity);
+            attacksLeft--;
+            // wait a bit before spawning the next hitman in!
+            yield return new WaitForSeconds(1.85f);
         }
     }
 }
