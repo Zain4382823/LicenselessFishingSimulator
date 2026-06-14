@@ -164,12 +164,10 @@ public class Fishing : MonoBehaviour
                 Fish.fishID = "Deep Sea Shark";  // by default, start by assuming we caught a Deep Sea Shark. (BUTTON SPAM QTE)
 
                 // RNG determines whether or not we get different kinda sea monsters..
-                if (UnityEngine.Random.value < 0.25)
+                if (UnityEngine.Random.value < 0.33)
                     Fish.fishID = "Spike Anvil";  // DODGE QTE
-                else if (UnityEngine.Random.value < 0.25)
+                else if (UnityEngine.Random.value < 0.33)
                     Fish.fishID = "Sword Monster";  // PARRY QTE
-                else if (UnityEngine.Random.value < 0.25)
-                    Fish.fishID = "Lucid Dream Siren";  // PARAPPA QTE
                 break;
 
             case "Nightmare Orb":  // NIGHTMARE ORB!... Is technically just an orb, so..
@@ -188,8 +186,6 @@ public class Fishing : MonoBehaviour
                 SpikeAnvil.isActive = 1;  // ACTIVATE SPIKE ANVIL!!!!
                 break;
             case "Sword Monster":
-                break;
-            case "Lucid Dream Siren":
                 break;
         }
     }
