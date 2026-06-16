@@ -227,7 +227,7 @@ public class Fishing : MonoBehaviour
                 waitingForFish = false;  // on a successful roll, exit the while loop and advance to the next stage!
             else
                 Debug.Log("Fishing dice roll failed!!");
-            yield return new WaitForSeconds(3);  // if we fail this roll, we wait another 3 seconds before trying again..
+            yield return new WaitForSeconds(Progression.fishingSpeed);  // if we fail this roll, we wait another [FISHING SPEED] seconds before trying again..
         }
 
         // advance to "FishBitTheHook()" stage!
