@@ -7,6 +7,23 @@ public class Fishing : MonoBehaviour
     // introduce public variable for player animator, allows us to play animations from script!
     public Animator playerAnim;
 
+    // LOOT TYPE RNG VARIABLES
+
+    // Fish RNG - RNG variable that stores the likelihood of catching a fish!
+    public static float fishRNG = 0.65f;  // 65% chance!
+
+    // Junk RNG - RNG variable that stores the likelihood of catching junk!
+    public static float junkRNG = 0.35f;  // 35% chance!
+
+    // Sea Monster RNG - RNG variable that stores the likelihood of catching a sea monster!
+    public static float seaMonsterRNG = 0.2f;  // 20% chance!
+
+    // Treasure RNG - RNG variable that stores the likelihood of catching treasure!
+    public static float treasureRNG = 0.2f;  // 20% chance!
+
+    // Nightmare Orb RNG - RNG variable that stores the likelihood of catching the Nightmare Orb!
+    public static float nightmareOrbRNG = (1 / 1000000000);  // one in a BILLION chance!
+
     int fishCount = 0;  // when player catches fish, we increment fish count by 1!
 
     public static bool fishingMode = false;  // FISHING MODE: player casts line, waits for fish, fish bites hook, then player catches the fish!
@@ -104,13 +121,15 @@ public class Fishing : MonoBehaviour
     {
         // PHASE 1 - RNG Determines Fish Type..
 
-        if (UnityEngine.Random.value < 0.65)  // 65% chance for Fish!
+        if (UnityEngine.Random.value < fishRNG)  // [FISH RNG] chance for Fish!
             Fish.fishType = "Fish";
-        else if (UnityEngine.Random.value < 0.25)  // 25% chance for Sea Monster!
+        else if (UnityEngine.Random.value < junkRNG)  // [JUNK RNG] chance for Junk!
+            Fish.fishType = "Junk";
+        else if (UnityEngine.Random.value < seaMonsterRNG)  // [SEA MONSTER RNG] chance for Sea Monster!
             Fish.fishType = "Sea Monster";
-        else if (UnityEngine.Random.value < 0.20)  // 20% chance for Treasure!
+        else if (UnityEngine.Random.value < treasureRNG)  // [TREASURE RNG] chance for Treasure!
             Fish.fishType = "Treasure";
-        else if (UnityEngine.Random.value < (1 / 1000000000))  // One in a BILLION chance for Nightmare Orb, RAREST DROP IN THE GAME!!
+        else if (UnityEngine.Random.value < nightmareOrbRNG)  // [NIGHTMARE ORB RNG] chance for Nightmare Orb!
             Fish.fishType = "Nightmare Orb";
         else
             Fish.fishType = "Junk";  // otherwise, if it ain't fish, treasure, sea monster, or a nightmare orb.. it's junk!
