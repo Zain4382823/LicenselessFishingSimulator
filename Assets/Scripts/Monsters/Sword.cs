@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     Rigidbody2D rb;
+    bool startSpinning = false;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class Sword : MonoBehaviour
         // initialise rb velocity as zero
         rb.velocity = Vector2.zero;
 
-        // start up attack delay coroutine -> wait 1.25 seconds before launching sword at player!
+        // start up attack delay coroutine -> wait 1 second before launching sword at player!
         StartCoroutine(AttackDelay());
     }
 
@@ -23,14 +24,17 @@ public class Sword : MonoBehaviour
     void Update()
     {
         // make the sword constantly spin around!
-        transform.Rotate(0f, 0f, -0.5f, Space.Self);
+        if(startSpinning)
+            transform.Rotate(0f, 0f, -0.75f, Space.Self);
     }
 
     IEnumerator AttackDelay()
     {
-        // wait 1.25 seconds
-        yield return new WaitForSeconds(1.25f);
+        // wait 1 second
+        yield return new WaitForSeconds(0.5f);
+        // sword starts spinning now!!
+        startSpinning = true;
         // launch sword towards the player! (i'll use a velocity for this why not..)
-        rb.velocity = new Vector2(-2.5f,0f);  // LAUNCH SWORD LEFTWARDS!!
+        rb.velocity = new Vector2(-10f,0f);  // LAUNCH SWORD LEFTWARDS!!
     }
 }
