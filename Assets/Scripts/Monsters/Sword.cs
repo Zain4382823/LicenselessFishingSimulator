@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
+    // declaring rigidbody
     Rigidbody2D rb;
+    // START SPINNING -> setting this variable to true causes the sword to start spinning. this triggers when the sword gets launched at player!
     bool startSpinning = false;
+
+    // introduce velocity variables!
+    float xVelocity;
+    float yVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +41,6 @@ public class Sword : MonoBehaviour
         // sword starts spinning now!!
         startSpinning = true;
         // launch sword towards the player! (i'll use a velocity for this why not..)
-        rb.velocity = new Vector2(-10f,0f);  // LAUNCH SWORD LEFTWARDS!!
+        rb.velocity = new Vector2(xVelocity, yVelocity);  // LAUNCH SWORD LEFTWARDS!!
     }
 }
