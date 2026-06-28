@@ -19,16 +19,16 @@ public class Sword : MonoBehaviour
 
     /* ALL POSSIBLE SPAWN POSITIONS:
     
-    .TOP LEFT -> (x,y,z)
-    .TOP MIDDLE -> (x,y,z)
-    .TOP RIGHT -> (x,y,z)
+    .TOP LEFT -> (-1.5f, 2.51f, 0f)
+    .TOP MIDDLE -> (1.24f, 4.07f, 0f)
+    .TOP RIGHT -> (4.39f, 2.51f, 0f)
 
-    .MIDDLE LEFT -> (x,y,z)
-    .MIDDLE RIGHT -> (x,y,z)
+    .MIDDLE LEFT -> (-6.76f, 0.11f, 0f)
+    .MIDDLE RIGHT -> (6.76f, 0.11f, 0f)
 
-    .BOTTOM LEFT -> (x,y,z)
-    .BOTTOM MIDDLE -> (x,y,z)
-    .BOTTOM RIGHT -> (x,y,z)  */
+    .BOTTOM LEFT -> (-1.5f, -2.51f, 0f)
+    .BOTTOM MIDDLE -> (1.24f, -4.07f, 0f)
+    .BOTTOM RIGHT -> (4.39f, -2.51f, 0f)  */
 
 
     // Start is called before the first frame update
