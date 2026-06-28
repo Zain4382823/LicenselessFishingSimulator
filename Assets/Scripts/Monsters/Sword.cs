@@ -6,12 +6,30 @@ public class Sword : MonoBehaviour
 {
     // declaring rigidbody
     Rigidbody2D rb;
+
     // START SPINNING -> setting this variable to true causes the sword to start spinning. this triggers when the sword gets launched at player!
     bool startSpinning = false;
 
     // introduce velocity variables!
     float xVelocity;
     float yVelocity;
+
+    // SPAWN POS -> RNG string variable, determines where the sword spawns and the directions we launch it towards!
+    string SpawnPos = "Top Middle";
+
+    /* ALL POSSIBLE SPAWN POSITIONS:
+    
+    .TOP LEFT -> (x,y,z)
+    .TOP MIDDLE -> (x,y,z)
+    .TOP RIGHT -> (x,y,z)
+
+    .MIDDLE LEFT -> (x,y,z)
+    .MIDDLE RIGHT -> (x,y,z)
+
+    .BOTTOM LEFT -> (x,y,z)
+    .BOTTOM MIDDLE -> (x,y,z)
+    .BOTTOM RIGHT -> (x,y,z)  */
+
 
     // Start is called before the first frame update
     void Start()
