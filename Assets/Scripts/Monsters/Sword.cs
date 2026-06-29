@@ -40,6 +40,73 @@ public class Sword : MonoBehaviour
         // initialise rb velocity as zero
         rb.velocity = Vector2.zero;
 
+        // using RNG, determine which spawn position we'll be using!
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Top Left";
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Top Middle";
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Top Right";
+
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Middle Left";
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Middle Right";
+
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Bottom Left";
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Bottom Middle";
+        if (UnityEngine.Random.value < 0.15)
+            SpawnPos = "Bottom Right";
+
+        // now we use a switch statement to set position and velocity based on SpawnPos value!
+        switch(SpawnPos)
+        {
+            case "Top Left":
+                transform.position = new Vector3(-1.5f, 2.51f, 0f);
+                xVelocity = 5f;
+                yVelocity = -5f;
+                break;
+            case "Top Middle":
+                transform.position = new Vector3(1.24f, 4.07f, 0f);
+                xVelocity = 0f;
+                yVelocity = -5f;
+                break;
+            case "Top Right":
+                transform.position = new Vector3(4.39f, 2.51f, 0f);
+                xVelocity = -5f;
+                yVelocity = -5f;
+                break;
+
+            case "Middle Left":
+                transform.position = new Vector3(-6.76f, 0.11f, 0f);
+                xVelocity = 5f;
+                yVelocity = 0f;
+                break;
+            case "Middle Right":
+                transform.position = new Vector3(6.76f, 0.11f, 0f);
+                xVelocity = -5f;
+                yVelocity = 0f;
+                break;
+
+            case "Bottom Left":
+                transform.position = new Vector3(-1.5f, -2.51f, 0f);
+                xVelocity = 5f;
+                yVelocity = 5f;
+                break;
+            case "Bottom Middle":
+                transform.position = new Vector3(1.24f, -4.07f, 0f);
+                xVelocity = 0f;
+                yVelocity = 5f;
+                break;
+            case "Bottom Right":
+                transform.position = new Vector3(4.39f, -2.51f, 0f);
+                xVelocity = -5f;
+                yVelocity = 5f;
+                break;
+        }
+
         // start up attack delay coroutine -> wait 1 second before launching sword at player!
         StartCoroutine(AttackDelay());
     }
