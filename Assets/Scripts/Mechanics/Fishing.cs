@@ -199,12 +199,13 @@ public class Fishing : MonoBehaviour
         switch (Fish.fishID)
         {
             case "Deep Sea Shark":
-                DeepSeaShark.isActive = 1;  // ACTIVATE DEEP SEA SHARK!!!
+                DeepSeaShark.isActive = 1;  // ACTIVATE DEEP SEA SHARK!
                 break;
             case "Spike Anvil":
-                SpikeAnvil.isActive = 1;  // ACTIVATE SPIKE ANVIL!!!!
+                SpikeAnvil.isActive = 1;  // ACTIVATE SPIKE ANVIL!
                 break;
             case "Sword Monster":
+                SwordMonster.attackState = 1; // ACTIVATE SWORD MONSTER!
                 break;
         }
     }

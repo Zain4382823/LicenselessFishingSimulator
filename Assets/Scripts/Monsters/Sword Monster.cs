@@ -9,7 +9,7 @@ public class SwordMonster : MonoBehaviour
     public GameObject Sword;
 
     // ATTACK STATE - basically this is an attack trigger variable!
-    int attackState = 1;
+    public static int attackState = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,8 @@ public class SwordMonster : MonoBehaviour
 
     IEnumerator Attack()
     {
+        Debug.Log("SWORD MONSTER ATTACKS! When a sword gets close enough, press P to parry it!"); // ALERT THE PLAYER, TELL THEM TO PARRY USING P!
+
         // first off, start up the attack timer!
         StartCoroutine(AttackTimer());
 

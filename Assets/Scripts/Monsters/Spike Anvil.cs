@@ -36,6 +36,8 @@ public class SpikeAnvil : MonoBehaviour
 
     IEnumerator Attack()
     {
+        Debug.Log("SPIKE ANVIL ATTACKS! It will swoop down from above, use WASD to dodge!"); // ALERT THE PLAYER, TELL THEM TO DODGE ANVILS!
+
         while (attacksLeft > 0)
         {
             // spawn in Anvil Hitman prefab! (Decrement attacks left with each one spawned)
