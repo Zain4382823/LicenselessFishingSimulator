@@ -142,7 +142,7 @@ public class Sword : MonoBehaviour
     IEnumerator ParryTimer()
     {
         // wait a short amount of time..
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.375f);
         // you can now parry! set CanParry to true!
         CanParry = true;
     }
