@@ -44,23 +44,23 @@ public class Sword : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         // using RNG, determine which spawn position we'll be using!
-        if (UnityEngine.Random.value < 0.2)
+        if (UnityEngine.Random.value < 0.15)
             SpawnPos = "Top Left";
-        if (UnityEngine.Random.value < 0.2)
+        if (UnityEngine.Random.value < 0.10)
             SpawnPos = "Top Middle";
-        if (UnityEngine.Random.value < 0.2)
+        if (UnityEngine.Random.value < 0.15)
             SpawnPos = "Top Right";
 
-        if (UnityEngine.Random.value < 0.15)
+        if (UnityEngine.Random.value < 0.25)
             SpawnPos = "Middle Left";
-        if (UnityEngine.Random.value < 0.15)
+        if (UnityEngine.Random.value < 0.25)
             SpawnPos = "Middle Right";
 
-        if (UnityEngine.Random.value < 0.10)
+        if (UnityEngine.Random.value < 0.175)
             SpawnPos = "Bottom Left";
-        if (UnityEngine.Random.value < 0.10)
+        if (UnityEngine.Random.value < 0.175)
             SpawnPos = "Bottom Middle";
-        if (UnityEngine.Random.value < 0.10)
+        if (UnityEngine.Random.value < 0.175)
             SpawnPos = "Bottom Right";
 
         // now we use a switch statement to set position and velocity based on SpawnPos value!
@@ -72,7 +72,7 @@ public class Sword : MonoBehaviour
                 yVelocity = -5f;
                 break;
             case "Top Middle":
-                transform.position = new Vector3(1.24f, 4.07f, 0f);
+                transform.position = new Vector3(1.24f, 3.07f, 0f);
                 xVelocity = 0f;
                 yVelocity = -5f;
                 break;
@@ -83,7 +83,7 @@ public class Sword : MonoBehaviour
                 break;
 
             case "Middle Left":
-                transform.position = new Vector3(-3f, 0.11f, 0f);
+                transform.position = new Vector3(-1.6f, 0.11f, 0f);
                 xVelocity = 5f;
                 yVelocity = 0f;
                 break;
@@ -94,12 +94,12 @@ public class Sword : MonoBehaviour
                 break;
 
             case "Bottom Left":
-                transform.position = new Vector3(-1.5f, -2.51f, 0f);
+                transform.position = new Vector3(-1.35f, -2.35f, 0f);
                 xVelocity = 5f;
                 yVelocity = 5f;
                 break;
             case "Bottom Middle":
-                transform.position = new Vector3(1.24f, -4.07f, 0f);
+                transform.position = new Vector3(1.24f, -3.07f, 0f);
                 xVelocity = 0f;
                 yVelocity = 5f;
                 break;
@@ -142,8 +142,11 @@ public class Sword : MonoBehaviour
     IEnumerator ParryTimer()
     {
         // wait a short amount of time..
-        yield return new WaitForSeconds(0.375f);
+        yield return new WaitForSeconds(0.265f);
         // you can now parry! set CanParry to true!
         CanParry = true;
+        // despawn after 2.5 seconds
+        yield return new WaitForSeconds(2.5f);
+        Destroy(gameObject);
     }
 }

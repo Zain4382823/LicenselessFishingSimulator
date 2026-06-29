@@ -12,9 +12,6 @@ public class SpikeAnvil : MonoBehaviour
     // isActive values:  [0] -> Not active  [1] -> Activation triggered  [2] -> Active
     public static int isActive = 0;
 
-    // helps keep track of whether spike anvil is flying up, or falling down from above the player.
-    int attackStage = 0;
-
     // normal spike anvil attacks twice, NIGHTMARE SPIKE ANVIL DOUBLE ATTACKS EACH TURN, (BOTH SIDES) SO FOR NIGHTMARE MODE, WE SET IT TO 4 INSTEAD!
     int attacksLeft = 0;
 
