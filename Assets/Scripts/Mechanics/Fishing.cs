@@ -191,6 +191,7 @@ public class Fishing : MonoBehaviour
 
             case "Nightmare Orb":  // NIGHTMARE ORB!... Is technically just an orb, so..
                 Fish.fishID = "Nightmare Orb";
+                StartCoroutine(GameWin());  // Load up Game Win sequence!
                 break;
         }
 
@@ -291,5 +292,13 @@ public class Fishing : MonoBehaviour
                 Debug.Log("Oh no! The fish got away!");
             }
         }
+    }
+
+    // GAME WIN -> Player caught Nightmare Orb! Say "YOU WON!" and close the game a few seconds later.
+    IEnumerator GameWin()
+    {
+        Debug.Log("YOU WON! Thanks for playing!");
+        yield return new WaitForSeconds(2);
+        Application.Quit();  // closes the game!
     }
 }
