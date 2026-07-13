@@ -34,6 +34,8 @@ public class Bait : MonoBehaviour
                 // OPEN THE BAIT MENU!
                 Debug.Log("Bait Menu Opened!");
                 BaitMenuOpen = true;
+                // DISPLAY MENU!
+                MenuDisplay();
             }
             else  // OPEN CHECK AFTER
             {
@@ -42,5 +44,11 @@ public class Bait : MonoBehaviour
                 BaitMenuOpen = false;
             }
         }
+    }
+
+    void MenuDisplay()
+    {
+        Debug.Log("SELECT YOUR BAIT:" +
+            "\n (1) - Fish Bait \n (2) - Junk Bait \n (3) - Treasure Bait \n (4) - Sea Monster Bait \n (5) - Super All-Rounder Bait");
     }
 }
