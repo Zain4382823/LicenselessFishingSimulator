@@ -5183,6 +5183,7 @@ GameObject:
   - component: {fileID: 451174744}
   - component: {fileID: 451174746}
   - component: {fileID: 451174745}
+  - component: {fileID: 451174747}
   m_Layer: 0
   m_Name: MechanicManager
   m_TagString: Untagged
@@ -5230,6 +5231,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 654480341}
+--- !u!114 &451174747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451174743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66fabc91a3d55b40aca1c362bcdb393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &453884778
 GameObject:
   m_ObjectHideFlags: 0
