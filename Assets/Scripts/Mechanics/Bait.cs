@@ -26,9 +26,21 @@ public class Bait : MonoBehaviour
     void Update()
     {
         // PRESSING B OPENS / CLOSES THE BAIT MENU!!
-        if(Input.GetKey(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B))
         {
-
+            // if & else statements for open / close checks!!
+            if (!BaitMenuOpen) // CLOSE CHECK FIRST
+            {
+                // OPEN THE BAIT MENU!
+                Debug.Log("Bait Menu Opened!");
+                BaitMenuOpen = true;
+            }
+            else  // OPEN CHECK AFTER
+            {
+                // CLOSE THE BAIT MENU!
+                Debug.Log("Bait Menu Closed!");
+                BaitMenuOpen = false;
+            }
         }
     }
 }
