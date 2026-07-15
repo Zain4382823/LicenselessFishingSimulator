@@ -13,8 +13,8 @@ public class Bait : MonoBehaviour
     // is a bait currently being used?
     bool BaitActive = false;
 
-    // which option number did the player select?
-    int SelectedBaitOption = 1;
+    // which option did the player select?
+    string SelectedBaitOption = "Fish";
 
     // INDIVIDUAL BAIT COUNTERS:
     int FishBaitCount = 1; int JunkBaitCount = 1; int TreasureBaitCount = 1; int SeaMonsterBaitCount = 1; int SuperAllRounderBaitCount = 1;
@@ -39,7 +39,62 @@ public class Bait : MonoBehaviour
 
     IEnumerator UseBait()
     {
-        yield return new WaitForSeconds(1);
+        BaitActive = true;
+
+        // APPLY BAIT EFFECTS! (Switch statement)
+        switch(SelectedBaitOption)
+        {
+            case "Fish":  // 300% Fishing Speed, +15% More Likely To Catch Fish
+                Progression.fishingSpeed /= 3;
+                Fishing.fishRNG *= 1.15f;
+                break;
+            case "Junk":  // 200% Fishing Speed, +50% More Likely To Catch Junk
+                Progression.fishingSpeed /= 2;
+                Fishing.junkRNG *= 1.5f;
+                break;
+            case "Treasure":  // 200% Fishing Speed, +50% More Likely To Catch Treasure
+                Progression.fishingSpeed /= 2;
+                Fishing.treasureRNG *= 1.5f;
+                break;
+            case "Sea Monster":  // 200% Fishing Speed, +50% More Likely To Catch Sea Monster
+                Progression.fishingSpeed /= 2;
+                Fishing.seaMonsterRNG *= 1.5f;
+                break;
+            case "Super All-Rounder":  // 400% Fishing Speed, +100% More Likely To Catch Treasure, Best Drops Guaranteed!
+                Progression.fishingSpeed /= 4;
+                Fishing.treasureRNG *= 2f;
+                break;
+        }
+
+        // bait lasts for 15 seconds, so we wait for 15 seconds..
+        yield return new WaitForSeconds(15);
+
+        BaitActive = false;
+
+        // REMOVE BAIT EFFECTS! (Switch statement)
+        switch (SelectedBaitOption)
+        {
+            case "Fish":  // -300% Fishing Speed, -15% LESS Likely To Catch Fish
+                Progression.fishingSpeed *= 3;
+                Fishing.fishRNG /= 1.15f;
+                break;
+            case "Junk":  // -200% Fishing Speed, -50% LESS Likely To Catch Junk
+                Progression.fishingSpeed *= 2;
+                Fishing.junkRNG /= 1.5f;
+                break;
+            case "Treasure":  // -200% Fishing Speed, -50% LESS Likely To Catch Treasure
+                Progression.fishingSpeed *= 2;
+                Fishing.treasureRNG /= 1.5f;
+                break;
+            case "Sea Monster":  // -200% Fishing Speed, -50% LESS Likely To Catch Sea Monster
+                Progression.fishingSpeed *= 2;
+                Fishing.seaMonsterRNG /= 1.5f;
+                break;
+            case "Super All-Rounder":  // -400% Fishing Speed, -100% LESS Likely To Catch Treasure, Normal Drops
+                Progression.fishingSpeed *= 4;
+                Fishing.treasureRNG /= 2f;
+                break;
+        }
     }
 
     void MenuOpenInputCheck()
@@ -72,7 +127,8 @@ public class Bait : MonoBehaviour
         {
             if (FishBaitCount > 0)
             {
-                // Load up UseBait Enum -> Decrement FishBaitCount -> Debug Log message confirmation
+                // SelectedBait = "Fish" -> Load up UseBait Enum -> Decrement FishBaitCount -> Debug Log message confirmation
+                SelectedBaitOption = "Fish";
                 UseBait();
                 FishBaitCount--;
                 Debug.Log("You used a fish bait!");
@@ -89,6 +145,7 @@ public class Bait : MonoBehaviour
             if (JunkBaitCount > 0)
             {
                 // Load up UseBait Enum -> Decrement JunkBaitCount -> Debug Log message confirmation
+                SelectedBaitOption = "Junk";
                 UseBait();
                 JunkBaitCount--;
                 Debug.Log("You used a junk bait!");
@@ -105,6 +162,7 @@ public class Bait : MonoBehaviour
             if (TreasureBaitCount > 0)
             {
                 // Load up UseBait Enum -> Decrement TreasureBaitCount -> Debug Log message confirmation
+                SelectedBaitOption = "Treasure";
                 UseBait();
                 TreasureBaitCount--;
                 Debug.Log("You used a treasure bait!");
@@ -121,6 +179,7 @@ public class Bait : MonoBehaviour
             if (SeaMonsterBaitCount > 0)
             {
                 // Load up UseBait Enum -> Decrement SeaMonsterBaitCount -> Debug Log message confirmation
+                SelectedBaitOption = "Sea Monster";
                 UseBait();
                 SeaMonsterBaitCount--;
                 Debug.Log("You used a sea monster bait!");
@@ -137,6 +196,7 @@ public class Bait : MonoBehaviour
             if (SuperAllRounderBaitCount > 0)
             {
                 // Load up UseBait Enum -> Decrement SuperAllRounderBaitCount -> Debug Log message confirmation
+                SelectedBaitOption = "Super All-Rounder";
                 UseBait();
                 SuperAllRounderBaitCount--;
                 Debug.Log("You used a super all-rounder bait!");
