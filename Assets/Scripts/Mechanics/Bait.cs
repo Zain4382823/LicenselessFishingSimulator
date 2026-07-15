@@ -25,6 +25,33 @@ public class Bait : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check if player pressed B to open / close the bait menu!
+        MenuOpenInputCheck();
+
+        // INPUT CHECK 1 - Fish Bait
+        if (Input.GetKeyDown(KeyCode.Alpha1) && BaitMenuOpen)
+        {
+            if (FishBaitCount > 0)
+            {
+                // Load up UseBait Enum -> Decrement FishBaitCount -> Debug Log message confirmation
+                UseBait();
+                FishBaitCount--;
+                Debug.Log("You used a Fish Bait!");
+            }
+            else
+            {
+                Debug.Log("You don't have any fish baits!");
+            }
+        }
+    }
+
+    IEnumerator UseBait()
+    {
+        yield return new WaitForSeconds(1);
+    }
+
+    void MenuOpenInputCheck()
+    {
         // PRESSING B OPENS / CLOSES THE BAIT MENU!!
         if (Input.GetKeyDown(KeyCode.B))
         {
