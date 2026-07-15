@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Fishing : MonoBehaviour
 {
+    #region DeclareVariables
+
     // introduce public variable for player animator, allows us to play animations from script!
     public Animator playerAnim;
 
@@ -37,6 +39,8 @@ public class Fishing : MonoBehaviour
     // ("NotCaught") -> Fish has bitten the hook, but player has not caught it yet! if player doesn't catch it in time, the fish gets away!
 
     bool fishingLeft = false; // is the player fishing on the left side?..
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()

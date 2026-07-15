@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bait : MonoBehaviour
 {
+
+    #region DeclareVariables
+
     // is the menu open?
     bool BaitMenuOpen = false;
 
@@ -15,6 +18,8 @@ public class Bait : MonoBehaviour
 
     // INDIVIDUAL BAIT COUNTERS:
     int FishBaitCount = 1; int JunkBaitCount = 1; int TreasureBaitCount = 1; int SeaMonsterBaitCount = 1; int SuperAllRounderBaitCount = 1;
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()

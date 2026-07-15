@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Progression : MonoBehaviour
 {
+
+    #region DeclareVariables
+
     // LEVELLING SYSTEM VARIABLES
     public static int fishingLevel = 1;
 
@@ -17,6 +20,8 @@ public class Progression : MonoBehaviour
 
     // FISHING SPEED -> The time interval between each fishing dice roll, levelling up reduces the time taken to catch fish!
     public static float fishingSpeed = 3;
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()
