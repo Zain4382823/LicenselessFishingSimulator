@@ -137,6 +137,13 @@ public class Bait : MonoBehaviour
         }
     }
 
+    // BAIT RESET CHECK -> If player selects a bait while another bait is still active, REMOVE OLD BAIT'S EFFECTS BEFORE APPLYING NEW BAIT!!
+    void BaitResetCheck()
+    {
+        if (BaitActive)
+            RemoveBait(); // Resetting bait effects before applying new bait's effects!
+    }
+
     // OPTION SELECT CHECK -> Checks which bait type was selected and handles all possible bait options!
     void OptionSelectCheck()
     {
@@ -145,6 +152,8 @@ public class Bait : MonoBehaviour
         {
             if (FishBaitCount > 0)
             {
+                BaitResetCheck();  // If an old bait's still active, REMOVE old bait's effects first!
+
                 // SelectedBait = "Fish" -> Load up UseBait Enum -> Decrement FishBaitCount -> Debug Log message confirmation
                 SelectedBaitOption = "Fish";
                 UseBait();
@@ -162,6 +171,8 @@ public class Bait : MonoBehaviour
         {
             if (JunkBaitCount > 0)
             {
+                BaitResetCheck();  // If an old bait's still active, REMOVE old bait's effects first!
+
                 // Load up UseBait Enum -> Decrement JunkBaitCount -> Debug Log message confirmation
                 SelectedBaitOption = "Junk";
                 UseBait();
@@ -179,6 +190,8 @@ public class Bait : MonoBehaviour
         {
             if (TreasureBaitCount > 0)
             {
+                BaitResetCheck();  // If an old bait's still active, REMOVE old bait's effects first!
+
                 // Load up UseBait Enum -> Decrement TreasureBaitCount -> Debug Log message confirmation
                 SelectedBaitOption = "Treasure";
                 UseBait();
@@ -196,6 +209,8 @@ public class Bait : MonoBehaviour
         {
             if (SeaMonsterBaitCount > 0)
             {
+                BaitResetCheck();  // If an old bait's still active, REMOVE old bait's effects first!
+
                 // Load up UseBait Enum -> Decrement SeaMonsterBaitCount -> Debug Log message confirmation
                 SelectedBaitOption = "Sea Monster";
                 UseBait();
@@ -213,6 +228,8 @@ public class Bait : MonoBehaviour
         {
             if (SuperAllRounderBaitCount > 0)
             {
+                BaitResetCheck();  // If an old bait's still active, REMOVE old bait's effects first!
+
                 // Load up UseBait Enum -> Decrement SuperAllRounderBaitCount -> Debug Log message confirmation
                 SelectedBaitOption = "Super All-Rounder";
                 UseBait();
