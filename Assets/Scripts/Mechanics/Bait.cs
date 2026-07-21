@@ -37,6 +37,7 @@ public class Bait : MonoBehaviour
         OptionSelectCheck();
     }
 
+    // USE BAIT -> Apply Bait + Wait 15 Seconds + Remove Bait
     IEnumerator UseBait()
     {
         BaitActive = true;
@@ -136,6 +137,7 @@ public class Bait : MonoBehaviour
         }
     }
 
+    // OPTION SELECT CHECK -> Checks which bait type was selected and handles all possible bait options!
     void OptionSelectCheck()
     {
         // INPUT CHECK 1 - Fish Bait
