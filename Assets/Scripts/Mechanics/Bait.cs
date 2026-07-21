@@ -40,9 +40,50 @@ public class Bait : MonoBehaviour
     IEnumerator UseBait()
     {
         BaitActive = true;
+        ApplyBait();
 
-        // APPLY BAIT EFFECTS! (Switch statement)
-        switch(SelectedBaitOption)
+        // bait lasts for 15 seconds, so we wait for 15 seconds..
+        yield return new WaitForSeconds(15);
+
+        BaitActive = false;
+        RemoveBait();
+    }
+
+    // MENU DISPLAY -> Display all Bait Menu options! (1-5)
+    void MenuDisplay()
+    {
+        Debug.Log("SELECT YOUR BAIT:" +
+            "\n (1) - Fish Bait \n (2) - Junk Bait \n (3) - Treasure Bait \n (4) - Sea Monster Bait \n (5) - Super All-Rounder Bait");
+    }
+
+    // MENU OPEN INPUT CHECK -> Handles opening / closing the bait menu! (B Input Handler)
+    void MenuOpenInputCheck()
+    {
+        // PRESSING B OPENS / CLOSES THE BAIT MENU!!
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            // if & else statements for open / close checks!!
+            if (!BaitMenuOpen) // CLOSE CHECK FIRST
+            {
+                // OPEN THE BAIT MENU!
+                Debug.Log("Bait Menu Opened!");
+                BaitMenuOpen = true;
+                // DISPLAY MENU!
+                MenuDisplay();
+            }
+            else  // OPEN CHECK AFTER
+            {
+                // CLOSE THE BAIT MENU!
+                Debug.Log("Bait Menu Closed!");
+                BaitMenuOpen = false;
+            }
+        }
+    }
+
+    // APPLY BAIT EFFECTS! (Switch statement handling all bait types)
+    void ApplyBait()
+    {
+        switch (SelectedBaitOption)
         {
             case "Fish":  // 300% Fishing Speed, +15% More Likely To Catch Fish
                 Progression.fishingSpeed /= 3;
@@ -65,13 +106,11 @@ public class Bait : MonoBehaviour
                 Fishing.treasureRNG *= 2f;
                 break;
         }
+    }
 
-        // bait lasts for 15 seconds, so we wait for 15 seconds..
-        yield return new WaitForSeconds(15);
-
-        BaitActive = false;
-
-        // REMOVE BAIT EFFECTS! (Switch statement)
+    // REMOVE BAIT EFFECTS! (Switch statement handling all bait types)
+    void RemoveBait()
+    {
         switch (SelectedBaitOption)
         {
             case "Fish":  // -300% Fishing Speed, -15% LESS Likely To Catch Fish
@@ -94,29 +133,6 @@ public class Bait : MonoBehaviour
                 Progression.fishingSpeed *= 4;
                 Fishing.treasureRNG /= 2f;
                 break;
-        }
-    }
-
-    void MenuOpenInputCheck()
-    {
-        // PRESSING B OPENS / CLOSES THE BAIT MENU!!
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            // if & else statements for open / close checks!!
-            if (!BaitMenuOpen) // CLOSE CHECK FIRST
-            {
-                // OPEN THE BAIT MENU!
-                Debug.Log("Bait Menu Opened!");
-                BaitMenuOpen = true;
-                // DISPLAY MENU!
-                MenuDisplay();
-            }
-            else  // OPEN CHECK AFTER
-            {
-                // CLOSE THE BAIT MENU!
-                Debug.Log("Bait Menu Closed!");
-                BaitMenuOpen = false;
-            }
         }
     }
 
@@ -206,11 +222,5 @@ public class Bait : MonoBehaviour
                 Debug.Log("You don't have any super all-rounder baits!");
             }
         }
-    }
-
-    void MenuDisplay()
-    {
-        Debug.Log("SELECT YOUR BAIT:" +
-            "\n (1) - Fish Bait \n (2) - Junk Bait \n (3) - Treasure Bait \n (4) - Sea Monster Bait \n (5) - Super All-Rounder Bait");
     }
 }
