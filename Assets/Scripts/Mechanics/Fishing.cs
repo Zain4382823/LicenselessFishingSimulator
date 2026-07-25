@@ -199,10 +199,25 @@ public class Fishing : MonoBehaviour
                 break;
         }
 
-        // PHASE 3 - ACTIVATE SEA MONSTERS!! (Depending on Fish ID)
+        // PHASE 3 - JUNK & SEA MONSTERS!! (Depending on Fish ID)
 
         switch (Fish.fishID)
         {
+            case "Fish Bait":
+                Bait.FishBaitCount++;  // player receives fish bait!
+                break;
+            case "Junk Bait":
+                Bait.JunkBaitCount++;  // player receives junk bait!
+                break;
+            case "Treasure Bait":
+                Bait.TreasureBaitCount++;  // player receives treasure bait!
+                break;
+            case "Sea Monster Bait":
+                Bait.SeaMonsterBaitCount++;  // player receives sea monster bait!
+                break;
+            case "Super All-Rounder Bait":
+                Bait.SuperAllRounderBaitCount++;  // player receives super all-rounder bait!
+                break;
             case "Deep Sea Shark":
                 DeepSeaShark.isActive = 1;  // ACTIVATE DEEP SEA SHARK!
                 break;

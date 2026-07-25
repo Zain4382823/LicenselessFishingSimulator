@@ -17,7 +17,8 @@ public class Bait : MonoBehaviour
     string SelectedBaitOption = "Fish";
 
     // INDIVIDUAL BAIT COUNTERS:
-    int FishBaitCount = 1; int JunkBaitCount = 1; int TreasureBaitCount = 1; int SeaMonsterBaitCount = 1; int SuperAllRounderBaitCount = 1;
+    public static int FishBaitCount = 1; public static int JunkBaitCount = 1; public static int TreasureBaitCount = 1;
+    public static int SeaMonsterBaitCount = 1; public static int SuperAllRounderBaitCount = 1;
 
     #endregion
 
