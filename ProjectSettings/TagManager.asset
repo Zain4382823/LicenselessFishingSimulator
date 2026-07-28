@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PlayerDetector
+  - Shop
   layers:
   - Default
   - TransparentFX
