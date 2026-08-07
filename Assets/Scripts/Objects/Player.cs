@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region DeclareVariables
+
     Rigidbody2D rb;
 
     // introduce public variable for player animator, allows us to play animations from script!
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
 
     const float moveSpeed = 4.5f;
 
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +85,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))  // colliding with enemy tag = YOU DIE!!
         {
