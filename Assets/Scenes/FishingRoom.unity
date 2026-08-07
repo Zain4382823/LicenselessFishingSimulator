@@ -27302,6 +27302,7 @@ GameObject:
   - component: {fileID: 1995990421}
   - component: {fileID: 1995990420}
   - component: {fileID: 1995990422}
+  - component: {fileID: 1995990423}
   m_Layer: 0
   m_Name: Fish Shop
   m_TagString: Shop
@@ -27421,6 +27422,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.69}
   m_EdgeRadius: 0
+--- !u!114 &1995990423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995990419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e20bde3f15b8a4d8719c15fdd58008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2012148508
 GameObject:
   m_ObjectHideFlags: 0
