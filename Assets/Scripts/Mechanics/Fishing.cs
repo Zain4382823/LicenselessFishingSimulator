@@ -6,27 +6,37 @@ public class Fishing : MonoBehaviour
 {
     #region DeclareVariables
 
+    #region Animator & Other Component Variables!
+
     // introduce public variable for player animator, allows us to play animations from script!
     public Animator playerAnim;
 
-    // LOOT TYPE RNG VARIABLES
+    #endregion
+
+    #region Loot Type RNG Variables!
 
     // Fish RNG - RNG variable that stores the likelihood of catching a fish!
-    public static float fishRNG = 0.65f;  // 65% chance!
-
-    // Junk RNG - RNG variable that stores the likelihood of catching junk!
-    public static float junkRNG = 0.35f;  // 35% chance!
-
-    // Sea Monster RNG - RNG variable that stores the likelihood of catching a sea monster!
-    public static float seaMonsterRNG = 0.2f;  // 20% chance!
-
-    // Treasure RNG - RNG variable that stores the likelihood of catching treasure!
-    public static float treasureRNG = 0.2f;  // 20% chance!
+    public static float fishRNG = 0.65f;        public static float junkRNG = 0.35f;     // 65% Fish chance | 35% Junk chance
+    public static float seaMonsterRNG = 0.2f;   public static float treasureRNG = 0.2f;  // 20% Sea Monster chance | 20% Treasure chance
 
     // Nightmare Orb RNG - RNG variable that stores the likelihood of catching the Nightmare Orb!
     public static float nightmareOrbRNG = (1 / 1000000000);  // one in a BILLION chance!
 
+    #endregion
+
+    #region ALL Fish Count Variables!
+    
+    // TEST VARIABLE
     int fishCount = 0;  // when player catches fish, we increment fish count by 1!
+
+    // ACTUAL FISH COUNT VARIABLES!
+    public static int SaltWaterTroutCount = 0;   public static int SilverSalmonCount = 0;
+    public static int GoldenCodCount = 0;        public static int DiamondAnglerCount = 0;
+
+
+    #endregion
+
+    #region Actual Fishing Variables!
 
     public static bool fishingMode = false;  // FISHING MODE: player casts line, waits for fish, fish bites hook, then player catches the fish!
     bool fishingModeCooldown = false;  // prevents spamming F key, which confuses the program..
@@ -41,6 +51,10 @@ public class Fishing : MonoBehaviour
     bool fishingLeft = false; // is the player fishing on the left side?..
 
     #endregion
+
+    #endregion
+
+    #region Start() & Update()!
 
     // Start is called before the first frame update
     void Start()
@@ -119,6 +133,10 @@ public class Fishing : MonoBehaviour
             caughtFish = "N/A";
         }
     }
+
+    #endregion
+
+    #region Fishing Functions!
 
     // FISHINGLOOTTABLERNG() -> SPIN THE RNG WHEEL!! WHAT'S THE DROP GONNA BE?
     void FishingLootTableRNG()
@@ -230,6 +248,10 @@ public class Fishing : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Fishing Enums!
+
     // COOLDOWN TIMER -> player is not allowed to spam F key, must wait a bit before toggling fishing mode ON / OFF!
     IEnumerator FishModeCDTimer()
     {
@@ -320,4 +342,6 @@ public class Fishing : MonoBehaviour
         yield return new WaitForSeconds(2);
         Application.Quit();  // closes the game!
     }
+
+    #endregion
 }

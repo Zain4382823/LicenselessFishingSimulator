@@ -7,6 +7,9 @@ public class Shop : MonoBehaviour
 {
     #region Declare Variables
 
+    // GOLD SUM -> How much gold will the player get from selling something?
+    int Goldsum = 0;
+
     #endregion
 
     #region Start() + Update() + Collision Check
@@ -107,7 +110,15 @@ public class Shop : MonoBehaviour
     // SELL FISH -> Here, we automatically sell all of the fish + lucky diamonds in player's inventory!
     void SellFish()
     {
+        // SELL ALL FISH - THE ULTIMATE EQUATION!
+        Goldsum = (50 * Fishing.SaltWaterTroutCount) + (100 * Fishing.SilverSalmonCount) + (250 * Fishing.GoldenCodCount) + (1250 * Fishing.DiamondAnglerCount);
 
+        // ADD GOLD SUM TO GOLD COUNT!
+        Progression.gold += Goldsum;
+
+        // RESET FISH COUNTS!
+        Fishing.SaltWaterTroutCount = 0;   Fishing.SilverSalmonCount = 0;
+        Fishing.GoldenCodCount = 0;        Fishing.DiamondAnglerCount = 0;
     }
 
     // SELL BAITS -> Here, we sell a specific type of bait, depending on what the player selected! (Switch statement time!)
