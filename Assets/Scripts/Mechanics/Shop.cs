@@ -45,7 +45,8 @@ public class Shop : MonoBehaviour
     // MAIN MENU -> First, let's ask the player if they want to buy or sell items!
     void MainMenu()
     {
-        Console.WriteLine("BUY or SELL? \n (Q -> Buy Menu | E -> Sell Menu)");
+        Console.WriteLine("BUY or SELL? \n" +
+            "(Q -> Buy Menu | E -> Sell Menu)");
     }
 
     // BUY MENU -> Display all the items you can buy, including the price!
@@ -151,27 +152,27 @@ public class Shop : MonoBehaviour
         switch (SelectedBait)
         {
             case "Fish":
-                Goldsum = (200 * Bait.FishBaitCount);    // calculate the sum of gold we'll get buy selling all baits! e.g (200 x 3 = 600 gold)
+                Goldsum = (200 * Bait.FishBaitCount);    // calculate the sum of gold we'll get by selling all baits! e.g (200 x 3 = 600 gold)
                 Progression.gold += Goldsum;             // add calculated sum of gold to player's wallet, so to speak!
                 Bait.FishBaitCount = 0;                 // reset bait count, all of it has been SOLD!
                 break;
             case "Junk":
-                Goldsum = (200 * Bait.JunkBaitCount);    // calculate the sum of gold we'll get buy selling all baits! e.g (200 x 3 = 600 gold)
+                Goldsum = (200 * Bait.JunkBaitCount);    // calculate the sum of gold we'll get by selling all baits! e.g (200 x 3 = 600 gold)
                 Progression.gold += Goldsum;             // add calculated sum of gold to player's wallet, so to speak!
                 Bait.JunkBaitCount = 0;                 // reset bait count, all of it has been SOLD!
                 break;
             case "Treasure":
-                Goldsum = (400 * Bait.TreasureBaitCount);    // calculate the sum of gold we'll get buy selling all baits! e.g (400 x 3 = 1200 gold)
+                Goldsum = (400 * Bait.TreasureBaitCount);    // calculate the sum of gold we'll get by selling all baits! e.g (400 x 3 = 1200 gold)
                 Progression.gold += Goldsum;                 // add calculated sum of gold to player's wallet, so to speak!
                 Bait.TreasureBaitCount = 0;                 // reset bait count, all of it has been SOLD!
                 break;
             case "Sea Monster":
-                Goldsum = (400 * Bait.SeaMonsterBaitCount);    // calculate the sum of gold we'll get buy selling all baits! e.g (400 x 3 = 1200 gold)
+                Goldsum = (400 * Bait.SeaMonsterBaitCount);    // calculate the sum of gold we'll get by selling all baits! e.g (400 x 3 = 1200 gold)
                 Progression.gold += Goldsum;                   // add calculated sum of gold to player's wallet, so to speak!
                 Bait.SeaMonsterBaitCount = 0;                 // reset bait count, all of it has been SOLD!
                 break;
             case "All-Rounder":
-                Goldsum = (600 * Bait.SuperAllRounderBaitCount);    // calculate the sum of gold we'll get buy selling all baits! e.g (600 x 3 = 1800 gold)
+                Goldsum = (600 * Bait.SuperAllRounderBaitCount);    // calculate the sum of gold we'll get by selling all baits! e.g (600 x 3 = 1800 gold)
                 Progression.gold += Goldsum;                        // add calculated sum of gold to player's wallet, so to speak!
                 Bait.SuperAllRounderBaitCount = 0;                 // reset bait count, all of it has been SOLD!
                 break;
