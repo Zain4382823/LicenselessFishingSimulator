@@ -51,31 +51,51 @@ public class Shop : MonoBehaviour
     // BUY MENU -> Display all the items you can buy, including the price!
     void BuyMenu()
     {
-
+        Console.WriteLine("BUY ITEMS:\n" +
+            "[1] -> Baits!\n" +
+            "[2] -> Fishing Rod Upgrades!\n" +
+            "[3] -> Water Upgrades! (750G)\n" +
+            "[4] -> Ominous Shadow Onus! (2000G)\n");
     }
 
     // SELL MENU -> Display all the items you can sell, including the price!
     void SellMenu()
     {
-
+        Console.WriteLine("SELL ITEMS:\n" +
+            "[1] -> Fish!\n" +
+            "[2] -> Baits!\n" +
+            "[3] -> Lucky Diamonds! (5000G + 5000XP)\n");
     }
 
     // BUY BAIT MENU -> Print all bait types and their buying price!
     void BuyBaitMenu()
     {
-
+        Console.WriteLine("BUY BAITS:\n" +
+            "[1] -> Fish Bait! (250G)\n" +
+            "[2] -> Junk Bait! (250G)\n" +
+            "[3] -> Treasure Bait!(500G)\n" +
+            "[4] -> Sea Monster Bait! (500G)\n" +
+            "[5] -> Super All-Rounder Bait! (750G)\n");
     }
 
     // SELL BAIT MENU -> Print all bait types and their selling price!
     void SellBaitMenu()
     {
-
+        Console.WriteLine("BUY BAITS:\n" +
+            "[1] -> Fish Bait! (200G + 75XP)\n" +
+            "[2] -> Junk Bait! (200G + 75XP)\n" +
+            "[3] -> Treasure Bait! (400G + 150XP)\n" +
+            "[4] -> Sea Monster Bait! (400G + 150XP)\n" +
+            "[5] -> Super All-Rounder Bait! (600G + 300XP)\n");
     }
 
     // BUY ROD UPGRADES MENU -> Print all rod upgrades and their price! (N)
     void BuyRodUpgradesMenu()
     {
-
+        Console.WriteLine("SELL ITEMS:\n" +
+            "[1] -> Efficiency! (500G)\n" +
+            "[2] -> Multi-Catch! (1500G)\n" +
+            "[3] -> Auto-Catch! (750G)\n");
     }
 
     #endregion
