@@ -118,7 +118,29 @@ public class Shop : MonoBehaviour
     // BUY BAITS -> Here, we buy a specific bait depending on what the player selected!
     void BuyBaits()
     {
-
+        switch(SelectedBait)
+        {
+            case "Fish":
+                Progression.gold -= 250;  // -250 Gold
+                Bait.FishBaitCount++;  // +1 Fish Bait
+                break;
+            case "Junk":
+                Progression.gold -= 250;  // -250 Gold
+                Bait.JunkBaitCount++;  // +1 Junk Bait
+                break;
+            case "Treasure":
+                Progression.gold -= 500;  // -500 Gold
+                Bait.TreasureBaitCount++;  // +1 Treasure Bait
+                break;
+            case "Sea Monster":
+                Progression.gold -= 500;  // -500 Gold
+                Bait.SeaMonsterBaitCount++;  // +1 Sea Monster Bait
+                break;
+            case "Super All-Rounder":
+                Progression.gold -= 750;  // -750 Gold
+                Bait.SuperAllRounderBaitCount++;  // +1 Super All-Rounder Bait
+                break;
+        }
     }
 
     // BUY ROD UPGRADES -> Implement an upgrade based on what the player selected! (Upgrade variables needed here..)
