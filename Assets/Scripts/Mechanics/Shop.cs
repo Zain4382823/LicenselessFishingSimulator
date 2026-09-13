@@ -171,7 +171,17 @@ public class Shop : MonoBehaviour
     // BUY WATER UPGRADES -> Using a water level variable, upgrade water level until it's max level!
     void BuyWaterUpgrades()
     {
+        // UPGRADE PRICE -> 750 Increments with each upgrade! (750G, 1500G, 2250G, 3000G)
+        Goldsum = 750 * waterLevel;
+        Progression.gold -= Goldsum;  // Player loses Goldsum amount of gold!
 
+        // WATER UPGRADE -> Permanently improved drops!
+        Fishing.fishRNG -= 0.05f;  // less fish..
+        Fishing.treasureRNG += 0.05f;  // more treasure..
+        Fishing.nightmareOrbRNG /= 10;  // nightmare orb more likely..
+
+        // INCREASE WATER LEVEL
+        waterLevel++;
     }
 
     // BUY SHADOW ONUS -> This is a permanent upgrade they can buy infinitely, it slightly increases Nightmare Orb drop rate!
