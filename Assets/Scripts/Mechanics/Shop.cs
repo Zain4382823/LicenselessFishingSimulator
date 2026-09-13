@@ -13,6 +13,9 @@ public class Shop : MonoBehaviour
     // SELECTED BAIT -> Helps us keep track of which bait type we're buying / selling!
     public static string SelectedBait = "Fish";
 
+    // SELECTED ROD UPGRADE -> Helps us keep track of which rod upgrade they're buying!
+    public static string SelectedRodUpgrade = "Efficiency";
+
     // EFFICIENCY: Faster fishing speed!
     int efficiencyLV = 0;
 
@@ -146,7 +149,23 @@ public class Shop : MonoBehaviour
     // BUY ROD UPGRADES -> Implement an upgrade based on what the player selected! (Upgrade variables needed here..)
     void BuyRodUpgrades()
     {
-
+        switch(SelectedRodUpgrade)
+        {
+            case "Efficiency":
+                Progression.gold -= 500;  // -500 Gold
+                Progression.fishingSpeed -= 0.15f;  // Faster fishing speed!
+                // (DO LATER) -> CREATE NEW VARIABLE IN PROGRESSION.CS FOR MIN FISHING SPEED & REDUCE IT HERE AS A BONUS!
+                efficiencyLV++;  // Check this variable, to make sure they can't buy again when it's max level.
+                break;
+            case "Multi-Catch":
+                Progression.gold -= 1500;  // -1500 Gold
+                multiCatchLV++;  // Check this variable when catching fish, do a while loop!
+                break;
+            case "Auto-Catch":
+                Progression.gold -= 750;  // -750 Gold
+                autoCatch = true;  // Check this variable when a fish bites the hook, do an if statement!
+                break;
+        }
     }
 
     // BUY WATER UPGRADES -> Using a water level variable, upgrade water level until it's max level!
