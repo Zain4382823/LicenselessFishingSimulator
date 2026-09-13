@@ -154,7 +154,7 @@ public class Shop : MonoBehaviour
             case "Efficiency":
                 Progression.gold -= 500;  // -500 Gold
                 Progression.fishingSpeed -= 0.15f;  // Faster fishing speed!
-                // (DO LATER) -> CREATE NEW VARIABLE IN PROGRESSION.CS FOR MIN FISHING SPEED & REDUCE IT HERE AS A BONUS!
+                Progression.minFishingSpeed -= 0.05f;  // slightly reduce minimum fishing speed as a bonus.
                 efficiencyLV++;  // Check this variable, to make sure they can't buy again when it's max level.
                 break;
             case "Multi-Catch":

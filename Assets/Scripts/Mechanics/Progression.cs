@@ -21,6 +21,9 @@ public class Progression : MonoBehaviour
     // FISHING SPEED -> The time interval between each fishing dice roll, levelling up reduces the time taken to catch fish!
     public static float fishingSpeed = 3;
 
+    // MIN FISHING SPEED -> Starts at 0.5 seconds, can be gradually lowered with fishing rod Efficiency upgrades!
+    public static float minFishingSpeed = 0.5f;
+
     #endregion
 
     // Start is called before the first frame update
@@ -42,7 +45,7 @@ public class Progression : MonoBehaviour
             // LEVEL UP!!!
 
             // fishing speed increases, you wait less time for fish!
-            if(fishingSpeed > 0.5)
+            if(fishingSpeed > minFishingSpeed)
                 fishingSpeed -= 0.25f; // decrementing wait time by 0.25 seconds each time, let's cap it at 0.5 seconds for now..
 
             // increase the likelihood of catching Nightmare Orb!
