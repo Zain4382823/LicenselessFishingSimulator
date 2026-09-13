@@ -187,7 +187,8 @@ public class Shop : MonoBehaviour
     // BUY SHADOW ONUS -> This is a permanent upgrade they can buy infinitely, it slightly increases Nightmare Orb drop rate!
     void BuyShadowOnus()
     {
-
+        Progression.gold -= 2000;  // -2000 Gold
+        Fishing.nightmareOrbRNG /= 100;  // Increases Nightmare Orb considerately!
     }
 
     #endregion
