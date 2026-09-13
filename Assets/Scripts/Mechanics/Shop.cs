@@ -13,6 +13,18 @@ public class Shop : MonoBehaviour
     // SELECTED BAIT -> Helps us keep track of which bait type we're buying / selling!
     public static string SelectedBait = "Fish";
 
+    // EFFICIENCY: Faster fishing speed!
+    int efficiencyLV = 0;
+
+    // MULTI-CATCH: Catch multiple fish at once!
+    int multiCatchLV = 0;
+
+    // AUTO-CATCH: You no longer have to press F, fish get caught automatically!
+    bool autoCatch = false;
+
+    // WATER LEVEL: Keeps track of current water level, for upgrade purchase-related reasons!
+    int waterLevel = 1;
+
     #endregion
 
     #region Start() + Update() + Collision Check
